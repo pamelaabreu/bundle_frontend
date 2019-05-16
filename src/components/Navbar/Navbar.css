@@ -24,6 +24,10 @@
     transition: color .5s ease;
 }
 
+.bundleNavbar a:first-child {
+    margin-left: 0;
+}
+
 .bundleNavbar a:hover {
     text-decoration: none;
     color: black;
