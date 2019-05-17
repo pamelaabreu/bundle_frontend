@@ -1,4 +1,14 @@
-const itemArray = [
+
+
+
+
+
+
+
+
+
+// ITEM ARRAYS
+const clothing = [
 'Shirts', 
 'Tops',
 'Socks',
@@ -31,6 +41,9 @@ const itemArray = [
 'Heavy Jacket',
 'Scarf',
 'Gloves',
+];
+
+const accessories = [
 'Reading Glasses',
 'Sunglasses',
 'Pocketknife',
@@ -40,6 +53,9 @@ const itemArray = [
 'Pen',
 'Umbrella',
 'Travel Pillow',
+];
+
+const electronics = [
 'Tripod',
 'Mobile Phone',
 'Camera',
@@ -52,6 +68,9 @@ const itemArray = [
 'Tablet Charger',
 'Headphones',
 'Travel Adaptor',
+];
+
+const personals = [
 'Toothbrush',
 'Toothbrush Cover',
 'Floss',
@@ -85,6 +104,9 @@ const itemArray = [
 'Tampons',
 'Pads',
 'Deodorant',
+];
+
+const documents = [
 'Photocopies of Documents',
 'ID',
 'Tickets',
@@ -110,6 +132,9 @@ const itemArray = [
 'Accommodation Reservation',
 'Contact Information',
 'Book',
+];
+
+const firstAid = [
 'Pain Killers',
 'Medications',
 'Patches',
@@ -117,8 +142,14 @@ const itemArray = [
 'Drugs',
 'Prescriptions',
 'Tweezers',
+];
+
+const essentials = [
 'House Key',
 'Money Belt',
+];
+
+const children = [
 'Onesies',
 'Socks',
 'Trousers',
@@ -131,6 +162,9 @@ const itemArray = [
 'Pajamas',
 'Shoes',
 'Boots',
+];
+
+const backpack = [
 'Travel Pillow',
 'Book',
 'Kindle',
