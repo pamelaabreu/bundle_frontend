@@ -1,13 +1,9 @@
+/*
 
+ITEM ARRAYS
 
+*/
 
-
-
-
-
-
-
-// ITEM ARRAYS
 const clothing = [
 'Shirts', 
 'Tops',
@@ -194,3 +190,48 @@ const backpack = [
 'Tissue',
 'Water Bottle',
 ];
+
+const read = () => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./items.js', (data, err) => {
+            if (err) reject(err)
+            else resolve(JSON.parse(data))
+            // else resolve(data)
+        })
+    })
+};
+
+const write = (content) => {
+    // content = content.toString();
+    content = JSON.stringify(content);
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./items.js', content, 'utf-8', (err) => {
+            if (err) reject(err)
+            else resolve()
+        })
+    })
+};
+
+const buildObject = (category, arr) => {
+    const obj = {};
+    for (let i = 0; i < arr.length, i++) {
+        // do stuff
+    }
+    return obj;
+}
+
+const itemsObject = buildObject();
+
+/*
+write( itemsObject )
+.then( _=> {
+    console.log('success!')
+    return read()
+})
+.then( data => {
+    console.log('data: ', data);
+})
+.catch( err => {
+    console.log('err: ', err.toString());
+});
+*/
