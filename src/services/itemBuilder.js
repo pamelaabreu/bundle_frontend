@@ -194,7 +194,7 @@ const backpack = [
 
 const read = () => {
     return new Promise((resolve, reject) => {
-        fs.readFile('./items.js', (data, err) => {
+        fs.readFile('./items.json', (data, err) => {
             if (err) reject(err)
             else resolve(JSON.parse(data))
             // else resolve(data)
@@ -206,24 +206,53 @@ const write = (content) => {
     // content = content.toString();
     content = JSON.stringify(content);
     return new Promise((resolve, reject) => {
-        fs.writeFile('./items.js', content, 'utf-8', (err) => {
+        fs.writeFile('./items.json', content, 'utf-8', (err) => {
             if (err) reject(err)
             else resolve()
         })
     })
 };
-
-const buildObject = (category, arr) => {
-    const obj = {};
-    for (let i = 0; i < arr.length, i++) {
-        // do stuff
-    }
-    return obj;
+var array = [];
+const buildObjectArray = (category, arr, bag_type) => {
+    // const array = [];
+    for (let i = 0; i < arr.length; i++) {
+        const item = arr[i]
+        array.push(
+            {
+                name: item,
+                quantity: {2:1, 4:2, 7:2, 10:3, 14:4},
+                bag_type: bag_type,
+                category: category,
+            }
+        )
+    };
+    // return array;
 }
+// itemsObject = {general:{}};
+// itemsObject.general['clothing'] = buildObjectArray('clothing', clothing, 'checked');
+// itemsObject.general['accessories'] = buildObjectArray('accessories', accessories, 'personal');
+// itemsObject.general['electronics'] = buildObjectArray('electronics', electronics, 'carry-on');
+// itemsObject.general['personals'] = buildObjectArray('personals', personals, 'carry-on');
+// itemsObject.general['documents'] = buildObjectArray('documents', documents, 'personal');
+// itemsObject.general['first-aid'] = buildObjectArray('first-aid', firstAid, 'checked');
+// itemsObject.general['essentials'] = buildObjectArray('essentials', essentials, 'carry-on');
+// itemsObject.general['children'] = buildObjectArray('children', children, 'checked');
+// itemsObject.general['misc'] = buildObjectArray('misc', backpack, 'checked');
+const itemsObject = { general:[] };
+// const array = []
+buildObjectArray('clothing', clothing, 'checked') 
+buildObjectArray('accessories', accessories, 'personal') 
+buildObjectArray('electronics', electronics, 'carry-on') 
+buildObjectArray('personals', personals, 'carry-on') 
+buildObjectArray('documents', documents, 'personal') 
+buildObjectArray('first-aid', firstAid, 'checked') 
+buildObjectArray('essentials', essentials, 'carry-on') 
+buildObjectArray('children', children, 'checked') 
+buildObjectArray('misc', backpack, 'checked') 
+console.log(array)
+itemsObject.general = array;
+// console.log(itemsObject);
 
-const itemsObject = buildObject();
-
-/*
 write( itemsObject )
 .then( _=> {
     console.log('success!')
@@ -235,4 +264,3 @@ write( itemsObject )
 .catch( err => {
     console.log('err: ', err.toString());
 });
-*/
