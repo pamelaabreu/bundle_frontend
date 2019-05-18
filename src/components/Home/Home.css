@@ -11,29 +11,15 @@
     align-items: center;
 }
 
-.bundleHomeImage h1 {
+.bundleHomeImageTitle {
     font-size: 100px;
     font-weight: 600;
     color: white;
     padding-top: 5%;
 }
 
-.bundleHomeImage h2 {
+.bundleHomeImageTagline {
     color: white;
-}
-
-.bundleHomeImage button {
-    background: none;
-    border-radius: 20px;
-    border: 1px solid white;
-    color: white;
-    width: 25%;
-    height: 50px;
-    transition: background .2s ease;
-}
-
-.bundleHomeImage button:hover {
-    background: #ffffff6e;
 }
 
 .bundleHomeArrow {
