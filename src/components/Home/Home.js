@@ -5,9 +5,8 @@ const Home = props => {
     return (
         <>
             <div className='bundleHomeImage'>
-                <h1>Bundle</h1>
-                <h2>Worries less...</h2>
-                <button>Placeholder for Create Trip</button>
+                <h1 className='bundleHomeImageTitle'>Bundle</h1>
+                <h2 className='bundleHomeImageTagline'>Worries less...</h2>
             </div>
             
             <div className='bundleHomeArrow'></div>
