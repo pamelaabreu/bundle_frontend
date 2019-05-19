@@ -1,15 +1,12 @@
 import React from 'react';
 import './Home.css';
 
-import CreateTripModal from '../../containers/CreateTripModal/createTripModal';
-
 const Home = props => {
     return (
         <>
             <div className='bundleHomeImage'>
                 <h1 className='bundleHomeImageTitle'>Bundle</h1>
                 <h2 className='bundleHomeImageTagline'>Worries less...</h2>
-                <CreateTripModal />
             </div>
             
             <div className='bundleHomeArrow'></div>
