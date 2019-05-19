@@ -10,7 +10,7 @@ const Modal = props => {
 
     return (
         <>
-            <button onClick={handleShow}>Create Trip</button>
+            <button onClick={handleShow}>{props.modalButtonText}</button>
 
             <div className={show ? "displayModal flipOutY" : "displayNone"} >
                 <div className="displayModalMain">
