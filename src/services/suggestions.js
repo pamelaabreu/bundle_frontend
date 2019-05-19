@@ -10,7 +10,7 @@ const getDuration = (departureDate, returnDate) => moment(returnDate).from(momen
 const getSuggestions = (duration = 4, condition) => {
     // this function calls buildSuggestions based on the duration
     if (typeof duration !== 'number') duration = parseInt(duration);
-    if (isNaN(duration)) return ' duration is NaN';
+    if (isNaN(duration)) return buildSuggestions(4);
     // const conditions = ['rain', 'cold', 'hot'];
     if (duration < 3) return buildSuggestions(2);
     else if (duration < 5) return buildSuggestions(4);
