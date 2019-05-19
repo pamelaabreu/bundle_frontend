@@ -71,6 +71,9 @@ const buildSuggestions = (actual) => {
         // added a boolean property to be used in the suggestion page
         temp.pack = true;
 
+        // added image key with default url
+        temp.image = 'http://clipart-library.com/img/2104580.jpg';
+
         // if the category list does not exist in the suggestions object, create it
         if (!suggested[item.category]) suggested[item.category] = [];
 
