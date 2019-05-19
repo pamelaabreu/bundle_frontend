@@ -20,15 +20,15 @@ const getSuggestions = (duration = 4, condition) => {
     else return buildSuggestions(14);
 };
 
-const buildSuggestions = (actual) => {
+const buildSuggestions = (actualTripDuration) => {
     const suggested = {};
     // loop through general items
     for (let item of items.general) {
 
-        // based on actual length of stay
+        // based on actualTripDuration length of stay
         // determine if the item should be brought
-        if (item.quantity[actual] < 1) continue;
-        // if the quanity for the actual length is at least 1
+        if (item.quantity[actualTripDuration] < 1) continue;
+        // if the quanity for the actualTripDuration length is at least 1
         // add it to the list
         /* ----- */
 
@@ -36,7 +36,7 @@ const buildSuggestions = (actual) => {
         const temp = item;
 
         // change its quantity to the recommendetion based on length of stay
-        temp.quantity = item.quantity[actual];
+        temp.quantity = item.quantity[actualTripDuration];
 
         // added a boolean property to be used in the suggestion page
         temp.pack = true;
