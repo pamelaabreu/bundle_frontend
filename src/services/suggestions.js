@@ -20,36 +20,6 @@ const getSuggestions = (duration = 4, condition) => {
     else return buildSuggestions(14);
 };
 
-const buildSuggestionsByBag = (actual) => {
-    const suggested = {};
-    // loop through general items
-    for (let item of items.general) {
-
-        // based on actual length of stay
-        // determine if the item should be brought
-        if (item.quantity[actual] < 1) continue;
-        // if the quanity for the actual length is at least 1
-        // add it to the list
-        /* ----- */
-
-        // make a copy of the current item
-        const temp = item;
-
-        // change its quantity to the recommendetion based on length of stay
-        temp.quantity = item.quantity[actual];
-
-        // if the bag type does not exist in suggested object, create it
-        if (!suggested[item.bag_type]) suggested[item.bag_type] = {};
-
-        // if the category list does not exist in the bag, create it
-        if (!suggested[item.bag_type][item.category]) suggested[item.bag_type][item.category] = [];
-
-        // add the item to the item to the recommended bag in its category
-        suggested[item.bag_type][item.category].push(temp);
-    };
-    return suggested;
-};
-
 const buildSuggestions = (actual) => {
     const suggested = {};
     // loop through general items
