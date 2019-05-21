@@ -1,20 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Weather extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+import WeatherCard from '../WeatherCard/WeatherCard'
 
-        }
-    }
-
-    render() {
+const  Weather = (props) => {
+    console.log(props.weatherInfo)
         return(
-            <div>
-
+            <div className='col-xl-7 col-lg-12 col-md-12 col-sm-12 row ml-1' style={{}}>
+                {   
+                    props.weatherInfo.map( (e, i) => <WeatherCard weather={ e } index={ i }/>)
+                }   
             </div>
         )
-    }
+
 }
 
 export default Weather

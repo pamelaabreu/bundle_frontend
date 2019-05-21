@@ -3,14 +3,12 @@ import React from 'react'
 const ItineraryCategory = (props) => {
     const { category } = props
     return(
-        <div>
-            <div> 
-                <p>{category.name}</p>
-                <p>Address: {category.address}</p>
-                <p>Phone: {category.phone_number}</p>
-                <p>{category.note}</p>
-            </div>   
-        </div>
+        <div className='card-body'> 
+            <p className='card-title'>{category.name}</p>
+            <p className='card-text'>Address: {category.address}</p>
+            <p className='card-text'>Phone: {category.phone_number}</p>
+            <p className='card-text'>{category.note}</p>
+        </div>   
     )
 }
 
