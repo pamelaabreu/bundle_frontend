@@ -6,7 +6,8 @@ class Signup extends React.Component {
             username: "", 
             email: "",
             password: ""
-        }
+        },
+        fillFormInputError: ""
     }
 
     handleInputChange = e => {
@@ -24,9 +25,9 @@ class Signup extends React.Component {
 
     handleSignupButtonClick = e => {
         e.preventDefault();
-        if(this.validateFormInputs()){
-            console.log("logic to signup user")
-        } else console.log("logic to send error")
+        if(!this.validateFormInputs()){
+            this.setState({ fillFormInputError: "Please fill out all required fields." })
+        } else console.log("logic to signup user")
     }
 
     render () {
