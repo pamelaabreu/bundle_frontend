@@ -14,15 +14,19 @@ class Signup extends React.Component {
     }
 
     render () {
+        const { inputs } = this.state;
+        const inputArray = Object.entries(inputs);
 
         return (
             <>
-                <div>
-                    <input placeholder='username'/>
--                   <input placeholder='email' />
--                   <input placeholder='password' />
+                <form>
+                    {inputArray.map(([inputName, inputValue], index) => {
+                        const inputType = inputName.toLowerCase() === 'password' ? "password" : "text";
+
+                        return <input key={index} type={inputType} name={inputName} placeholder={inputName}/>
+                    })}
                     <button>Signup</button>
-                </div>
+                </form>
             </>
         );
     }
