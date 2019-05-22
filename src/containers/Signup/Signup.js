@@ -1,5 +1,7 @@
 import React from 'react';
 
+import firebase from '../../firebase';
+
 class Signup extends React.Component {
     state = {
         inputs: {
@@ -32,7 +34,12 @@ class Signup extends React.Component {
             this.setState({ fillFormInputError: "Please fill out all required fields." });
         } 
         else {
+            const { inputs } = this.state;
+            const { email, password } = inputs;
+            
             // If the required inputs are filled out, register the user
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(response => response.user.uid, ({message}) => console.log("Error", message))
         }
     }
 
