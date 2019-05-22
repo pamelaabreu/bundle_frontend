@@ -16,8 +16,17 @@ class Signup extends React.Component {
         this.setState({ inputs })
     }
 
+    validateFormInputs = () => {
+        const { inputs } = this.state;
+        
+        return inputs.email.length > 0 && inputs.password.length > 0;
+    }
+
     handleSignupButtonClick = e => {
         e.preventDefault();
+        if(this.validateFormInputs()){
+            console.log("logic to signup user")
+        } else console.log("logic to send error")
     }
 
     render () {
