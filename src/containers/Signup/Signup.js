@@ -1,15 +1,11 @@
 import React from 'react';
 
 class Signup extends React.Component {
-    constructor (props) {
-        super(props)
-
-        this.state = {
-            inputs: {
-                username: "", 
-                email: "",
-                password: ""
-            }
+    state = {
+        inputs: {
+            username: "", 
+            email: "",
+            password: ""
         }
     }
 
