@@ -16,6 +16,10 @@ class Signup extends React.Component {
         this.setState({ inputs })
     }
 
+    handleSignupButtonClick = e => {
+        e.preventDefault();
+    }
+
     render () {
         const { inputs } = this.state;
         const inputArray = Object.entries(inputs);
@@ -28,7 +32,7 @@ class Signup extends React.Component {
 
                         return <input onChange={this.handleInputChange} key={index} type={inputType} value={inputValue} name={inputName} placeholder={inputName}/>
                     })}
-                    <button>Signup</button>
+                    <button onClick={this.handleSignupButtonClick}>Signup</button>
                 </form>
             </>
         );
