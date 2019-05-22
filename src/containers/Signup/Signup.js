@@ -12,6 +12,12 @@ class Signup extends React.Component {
     render () {
         return (
             <>
+                <div>
+                    <input placeholder='username'/>
+                    <input placeholder='email' />
+                    <input placeholder='password' />
+                    <button>Signup</button>
+                </div>
             </>
         );
     }
