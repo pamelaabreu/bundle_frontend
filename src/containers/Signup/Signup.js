@@ -5,17 +5,22 @@ class Signup extends React.Component {
         super(props)
 
         this.state = {
-
+            inputs: {
+                username: "", 
+                email: "",
+                password: ""
+            }
         }
     }
 
     render () {
+
         return (
             <>
                 <div>
                     <input placeholder='username'/>
-                    <input placeholder='email' />
-                    <input placeholder='password' />
+-                   <input placeholder='email' />
+-                   <input placeholder='password' />
                     <button>Signup</button>
                 </div>
             </>
