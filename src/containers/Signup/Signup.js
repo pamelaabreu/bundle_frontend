@@ -13,6 +13,13 @@ class Signup extends React.Component {
         }
     }
 
+    handleInputChange = e => {
+        const { inputs } = {...this.state};
+        inputs[e.target.name]= e.target.value.trim();
+
+        this.setState({ inputs })
+    }
+
     render () {
         const { inputs } = this.state;
         const inputArray = Object.entries(inputs);
@@ -23,7 +30,7 @@ class Signup extends React.Component {
                     {inputArray.map(([inputName, inputValue], index) => {
                         const inputType = inputName.toLowerCase() === 'password' ? "password" : "text";
 
-                        return <input key={index} type={inputType} name={inputName} placeholder={inputName}/>
+                        return <input onChange={this.handleInputChange} key={index} type={inputType} value={inputValue} name={inputName} placeholder={inputName}/>
                     })}
                     <button>Signup</button>
                 </form>
