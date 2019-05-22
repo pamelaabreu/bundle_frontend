@@ -27,16 +27,19 @@ class Signup extends React.Component {
         e.preventDefault();
         if(!this.validateFormInputs()){
             this.setState({ fillFormInputError: "Please fill out all required fields." })
-        } else console.log("logic to signup user")
+        } 
+        else {
+            //logic to do signup
+        }
     }
 
     render () {
-        const { inputs } = this.state;
+        const { inputs, fillFormInputError } = this.state;
         const inputArray = Object.entries(inputs);
 
         return (
-            <>
                 <form>
+                    {fillFormInputError ? <p>{fillFormInputError}</p> : null}
                     {inputArray.map(([inputName, inputValue], index) => {
                         const inputType = inputName.toLowerCase() === 'password' ? "password" : "text";
 
@@ -44,7 +47,6 @@ class Signup extends React.Component {
                     })}
                     <button onClick={this.handleSignupButtonClick}>Signup</button>
                 </form>
-            </>
         );
     }
 }
