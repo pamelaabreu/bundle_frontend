@@ -14,7 +14,7 @@ class Signup extends React.Component {
         const { inputs } = {...this.state};
         inputs[e.target.name]= e.target.value.trim();
 
-        this.setState({ inputs })
+        this.setState({ inputs });
     }
 
     validateFormInputs = () => {
@@ -25,22 +25,25 @@ class Signup extends React.Component {
 
     handleSignupButtonClick = e => {
         e.preventDefault();
+
+        // First check to see if all required inputs are filled out
         if(!this.validateFormInputs()){
-            this.setState({ fillFormInputError: "Please fill out all required fields." })
+            // If the required inputs aren't filled out, throw an error
+            this.setState({ fillFormInputError: "Please fill out all required fields." });
         } 
         else {
-            //logic to do signup
+            // If the required inputs are filled out, register the user
         }
     }
 
     render () {
         const { inputs, fillFormInputError } = this.state;
-        const inputArray = Object.entries(inputs);
+        const inputsArray = Object.entries(inputs);
 
         return (
                 <form>
                     {fillFormInputError ? <p>{fillFormInputError}</p> : null}
-                    {inputArray.map(([inputName, inputValue], index) => {
+                    {inputsArray.map(([inputName, inputValue], index) => {
                         const inputType = inputName.toLowerCase() === 'password' ? "password" : "text";
 
                         return <input onChange={this.handleInputChange} key={index} type={inputType} value={inputValue} name={inputName} placeholder={inputName}/>
