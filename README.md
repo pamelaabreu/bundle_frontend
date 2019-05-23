@@ -3,6 +3,25 @@ Help people who don't travel often or are going somewhere new to feel less anxio
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Table of Contents
+* **[Usage and Installation](#usage-and-installation)**
+
+### Usage and Installation
+In /src rename * **`firebaseConfigExample`** to * **`firebaseConfig`** and replace the Firebase Configurations with your own.
+
+```
+export default {
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
+  };
+```
+
+
 ## Available Scripts
 
 In the project directory, you can run:
