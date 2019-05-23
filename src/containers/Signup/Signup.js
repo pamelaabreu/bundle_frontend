@@ -9,7 +9,6 @@ class Signup extends React.Component {
       email: "",
       password: ""
     },
-    fillFormInputError: "",
     firebaseCreateUserError: ""
   };
 
@@ -39,12 +38,11 @@ class Signup extends React.Component {
   };
 
   render() {
-    const { inputs, fillFormInputError, firebaseCreateUserError } = this.state;
+    const { inputs, firebaseCreateUserError } = this.state;
     const inputsArray = Object.entries(inputs);
 
     return (
       <form onSubmit={this.handleSignupSubmit}>
-        {fillFormInputError ? <p>{fillFormInputError}</p> : null}
         {firebaseCreateUserError ? <p>{firebaseCreateUserError}</p> : null}
         {inputsArray.map(([inputName, inputValue], index) => {
           const inputType =
