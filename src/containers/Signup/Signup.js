@@ -20,7 +20,7 @@ class Signup extends React.Component {
     this.setState({ inputs });
   };
 
-  handleSignupButtonClick = e => {
+  handleSignupSubmit = e => {
     e.preventDefault();
 
     const { inputs } = this.state;
@@ -43,7 +43,7 @@ class Signup extends React.Component {
     const inputsArray = Object.entries(inputs);
 
     return (
-      <form>
+      <form onSubmit={this.handleSignupSubmit}>
         {fillFormInputError ? <p>{fillFormInputError}</p> : null}
         {firebaseCreateUserError ? <p>{firebaseCreateUserError}</p> : null}
         {inputsArray.map(([inputName, inputValue], index) => {
@@ -60,11 +60,11 @@ class Signup extends React.Component {
               name={inputName}
               placeholder={inputName}
               required={isRequired}
-              min="1"
+              min='1'
             />
           );
         })}
-        <button onClick={this.handleSignupButtonClick}>Signup</button>
+        <button type='submit'>Signup</button>
       </form>
     );
   }
