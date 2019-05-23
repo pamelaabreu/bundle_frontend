@@ -20,36 +20,24 @@ class Signup extends React.Component {
         this.setState({ inputs });
     }
 
-    validateFormInputs = () => {
-        const { inputs } = this.state;
-        
-        return inputs.email.length > 0 && inputs.password.length > 0;
-    }
-
     handleSignupButtonClick = e => {
         e.preventDefault();
 
-        // First check to see if all required inputs are filled out
-        if(!this.validateFormInputs()){
-            // If the required inputs aren't filled out, throw an error
-            this.setState({ fillFormInputError: "Please fill out all required fields." });
-        } 
-        else {
-            const { inputs } = this.state;
-            const { email, password } = inputs;
+        const { inputs } = this.state;
+        const { email, password } = inputs;
             
-            // If the required inputs are filled out, register the user
-            firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(
-                response => response.user.uid,
-                
-                // This is the handling for the Firebase error when creating a user 
-                ({message}) => this.setState({firebaseCreateUserError: message })
-            )
-            .then(firebaseUid => {
-                // Logic for creating user in the backend
-            })
-        }
+            
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(
+            response => response.user.uid,
+            
+            // This is the handling for the Firebase error when creating a user 
+            ({message}) => this.setState({firebaseCreateUserError: message })
+        )
+        .then(firebaseUid => {
+            // Logic for creating user in the backend
+        })
+
     }
 
     render () {
@@ -62,8 +50,17 @@ class Signup extends React.Component {
                     {firebaseCreateUserError ? <p>{firebaseCreateUserError}</p> : null}
                     {inputsArray.map(([inputName, inputValue], index) => {
                         const inputType = inputName.toLowerCase() === 'password' ? "password" : "text";
-
-                        return <input onChange={this.handleInputChange} key={index} type={inputType} value={inputValue} name={inputName} placeholder={inputName}/>
+                        const isRequired = inputName.toLowerCase() === 'username' ? false : true;
+                        return <input 
+                                onChange={this.handleInputChange} 
+                                key={index} 
+                                type={inputType} 
+                                value={inputValue} 
+                                name={inputName} 
+                                placeholder={inputName} 
+                                required={isRequired}
+                                min='1'
+                            />
                     })}
                     <button onClick={this.handleSignupButtonClick}>Signup</button>
                 </form>
