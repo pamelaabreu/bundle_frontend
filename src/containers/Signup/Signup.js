@@ -48,7 +48,7 @@ class Signup extends React.Component {
           const inputType =
             inputName.toLowerCase() === "password" ? "password" : "text";
           const isRequired =
-            inputName.toLowerCase() === "username" ? false : true;
+            inputName.toLowerCase() !== "username" ? true : false;
           return (
             <input
               onChange={this.handleInputChange}
