@@ -5,9 +5,9 @@ import WeatherCard from '../WeatherCard/WeatherCard'
 const  Weather = (props) => {
     console.log(props.weatherInfo)
         return(
-            <div className='col-xl-7 col-lg-12 col-md-12 col-sm-12 row ml-1' style={{}}>
+            <div className='row' style={{}}>
                 {   
-                    props.weatherInfo.map( (e, i) => <WeatherCard weather={ e } index={ i }/>)
+                    props.weatherInfo.map( (e, i) => <WeatherCard weather={ e } />)
                 }   
             </div>
         )

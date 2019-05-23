@@ -70,17 +70,22 @@ class Trip extends Component {
         const { city, country, departure_date, return_date } = this.state.trip
         return(
             <div className='container mt-5'>
-                <div className='row'>
-                    <h1>{ city }, { country }</h1>
-                    <div className='col-1'></div>
-                    <div className='' style={{}}>
-                        <p style={{ margin:'0' }}><span>{ departure_date.format('L') }</span> - <span>{ return_date.format('L') }</span></p>
-                        <p style={{ textAlign:'center', margin:'0' }}>{ moment().endOf(departure_date).to(return_date) }</p>
+                <div className='row justify-content-between'>
+                    <div className='col-lg-4' style={{}}>
+                        <div>
+                            <h5>Trip Details</h5>
+                            <h1 style={{fontSize:'3.5rem'}}>{ city }, { country }</h1>
+                        </div>
+                        <div className='' style={{}}>
+                            <p style={{}}>{ moment().endOf(departure_date).to(return_date) }</p>
+                        </div>
+                    </div>
+                    <div className='col-lg-8' style={{}}>
+                        <Weather weatherInfo={ this.state.weather_info }/>
                     </div>
                 </div>
-                <div className='row'>
+                <div className='col-10 row mt-3'>
                     <Itinerary info={ this.state.itinerary } trip={ this.state.trip } />
-                    <Weather weatherInfo={ this.state.weather_info }/>
                 </div>
             </div>
         )

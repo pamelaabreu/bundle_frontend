@@ -1,6 +1,4 @@
 import React from 'react'
-
-
 import ItineraryCategory from '../ItineraryCategory/ItineraryCategory'
 
 const findCategories = (categories) => {
@@ -30,18 +28,18 @@ const  Itinerary = (props) => {
     console.log(categories)
     console.log(props.info)
         return(
-            <div className='col-xl-5 col-lg-10 col-md-10 col-sm-12' style={{}}>
-                <h5>Itinerary</h5>
+            <div className='col-12' style={{}}>
+                <h3>Itinerary</h3>
                 <div className='row' style={{}}>
                     {
                         categories.map( category => {
                             return(
-                                <div className='card ml-3' style={{}}>
-                                    <div className='card-header'>
+                                <div className='col-5 card ml-3' style={{padding:'0'}}>
+                                    <div className='card-header' >
                                         <h4 className='card-title'>{category}</h4>
                                     </div>
                                     {
-                                        props.info.filter( e => e['itinerary_name'] === category).map( e => <ItineraryCategory category={e} /> )
+                                        props.info.filter( e => e['itinerary_name'] === category).map( e => <ItineraryCategory category={e} trip={props.trip} /> )
                                     }
                                 </div>
                             )   
