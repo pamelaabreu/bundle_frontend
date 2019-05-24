@@ -10,11 +10,12 @@ export default props => {
     pack,
     index
   } = props;
-  const toBePacked = pack
-    ? "item--font--packed"
-    : "item--font--unpacked";
-  return  (
-    <div className={toBePacked+"  item p-0 m-1 border border-white rounded"} onClick={handleClick('bundle', index)}>
+  const toBePacked = pack ? "item--font--packed" : "item--font--unpacked";
+  return (
+    <div
+      className={toBePacked + "  item p-0 m-1 border border-white rounded"}
+      onClick={handleClick("bundle", index)}
+    >
       <div className="container">
         <div className={"row align-items-center justify-content-center"}>
           <div className="col-12 px-1 pt-1  text-left div--icon--size">
@@ -25,7 +26,6 @@ export default props => {
               <i className="far fa-circle align-top item--icon--unbundled" />
             )}
           </div>
-
           <div>
             {/* ITEM IMAGE */}
             <img src={image} className="item--image--size rounded" alt={name} />
@@ -39,7 +39,7 @@ export default props => {
         </div>
       </div>
       <div className="col-12" onClick={handleClick("select", index)}>
-        <div className={'row align-items-center justify-content-center mt-3'}>
+        <div className={"row align-items-center justify-content-center mt-3"}>
           <span className="item--bundle--font">Pack</span>
         </div>
       </div>
