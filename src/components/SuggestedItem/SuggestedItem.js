@@ -3,16 +3,11 @@ import "./SuggestedItem.css";
 
 export default props => {
   const {
-    fav,
-    flag,
-    handleChange,
+    // flag,
     handleClick,
     image,
-    modifyQuant,
     name,
     pack,
-    packed,
-    quantity,
     index
   } = props;
   const toBePacked = pack
@@ -23,9 +18,7 @@ export default props => {
       <div className="container">
         <div className={"row align-items-center justify-content-center"}>
           <div className="col-12 px-1 pt-1  text-left div--icon--size">
-            {/* align-items-center */}
             {/* ICONS */}
-
             {pack ? (
               <i className="far fa-check-circle align-top item--icon--bundled" />
             ) : (
@@ -46,7 +39,6 @@ export default props => {
         </div>
       </div>
       <div className="col-12" onClick={handleClick("select", index)}>
-        {/* Item Pack On / Off */}
         <div className={'row align-items-center justify-content-center mt-3'}>
           <span className="item--bundle--font">Pack</span>
         </div>
