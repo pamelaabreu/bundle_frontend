@@ -11,9 +11,10 @@ export default props => {
     index
   } = props;
   const toBePacked = pack ? "item--font--packed" : "item--font--unpacked";
+  const borderColor = pack ? " item--border--packed " : " item--border--unpacked ";
   return (
     <div
-      className={toBePacked + "  item p-0 m-1 border border-white rounded"}
+      className={toBePacked + borderColor +"  item p-0 m-1 rounded"}
       onClick={handleClick("bundle", index)}
     >
       <div className="container">
