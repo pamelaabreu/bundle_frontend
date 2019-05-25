@@ -14,7 +14,6 @@ const findCategories = (categories) => {
 
     let categoryNamesUsedOnce = []
     Object.entries(uniqueCategoryNames).forEach( e => {
-        console.log(e[1])
         if (e[1] === 1) {
             categoryNamesUsedOnce.push(e[0])
         }

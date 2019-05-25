@@ -62,7 +62,6 @@ class Trip extends Component {
 
     }
     render() {
-        console.log(moment().endOf(this.state.trip.departure_date).to(this.state.trip.return_date))
         const { city, country, departure_date, return_date } = this.state.trip
         return(
             <div className='container mt-5'>
