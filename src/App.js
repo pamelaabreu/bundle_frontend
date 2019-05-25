@@ -17,15 +17,17 @@ class App extends Component {
     render () {
         return (
             <HashRouter>
-                <div className="App">
-                        <Route path='/' component={Navbar} />
-                        <div>
-                            <Switch>
-                                <Route path='/trip' exact component={Trip}></Route>
-                                <Route path='/' exact component={Home} />
-                            </Switch>
-                        </div>
-                </div>
+                <FirebaseAuthContext.Provider value={this.state.user}>
+                    <div className="App">
+                            <Route path='/' component={Navbar} />
+                            <div>
+                                <Switch>
+                                    <Route path='/trip' exact component={Trip}></Route>
+                                    <Route path='/' exact component={Home} />
+                                </Switch>
+                            </div>
+                    </div>
+                </FirebaseAuthContext.Provider>
             </HashRouter>
         );
     }
