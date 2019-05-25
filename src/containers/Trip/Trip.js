@@ -8,7 +8,6 @@ import Itinerary from '../../components/Itinerary/Itinerary'
 import Weather from '../../components/Weather/Weather'
 
 const baseURL = 'http://localhost:5000'
-const tripEndpointBase = '/trip/'
 const itineraryEndpointBase = '/itinerary/'
 const weatherEndpointBase = '/weather/'
 
@@ -37,9 +36,6 @@ class Trip extends Component {
             baseURL,
         })
         
-
-        console.log(APIKEYS.MQ_API_KEY)
-
         const location = `${this.state.trip.city} ${this.state.trip.country}`
         const mqLocation = await axios({
             method:'get',
@@ -71,17 +67,17 @@ class Trip extends Component {
         return(
             <div className='container mt-5'>
                 <div className='row justify-content-between'>
-                    <div className='col-lg-4' style={{}}>
+                    <div className='col-lg-4' >
                         <div>
                             <h5>Trip Details</h5>
-                            <h1 style={{fontSize:'3.5rem'}}>{ city }, { country }</h1>
+                            <p style={{ fontSize:'3.5rem' }}>{ city }, { country }</p>
                         </div>
-                        <div className='' style={{}}>
-                            <p style={{}}>{ moment().endOf(departure_date).to(return_date) }</p>
+                        <div>
+                            <p>{ moment().endOf(departure_date).to(return_date) }</p>
                         </div>
                     </div>
-                    <div className='col-lg-8' style={{}}>
-                        <Weather weatherInfo={ this.state.weather_info }/>
+                    <div className='col-lg-8'>
+                        <Weather weatherInfo={ this.state.weather_info } />
                     </div>
                 </div>
                 <div className='col-10 row mt-3'>

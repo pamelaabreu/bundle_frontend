@@ -7,10 +7,8 @@ const ItineraryCategory = (props) => {
     let phoneNumber = ''
     try {
          phoneNumber = parsePhoneNumber(`+ ${category.phone_number}`, country_codes[trip.country.toLowerCase()])
-         console.log(phoneNumber.country)
       } catch (error) {
         if (error instanceof ParseError) {
-          // Not a phone number, non-existent country, etc.
           console.log('error', error.message)
         } else {
           throw error
@@ -18,7 +16,7 @@ const ItineraryCategory = (props) => {
       }
     
     return(
-        <div className='card-body' style={{}}> 
+        <div className='card-body'> 
             <p className='card-title'>{category.name}</p>
             <p className='card-text'>Address: {category.address}</p>
             <p className='card-text'>Phone: {phoneNumber.formatInternational()}</p>

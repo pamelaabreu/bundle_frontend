@@ -1,4 +1,5 @@
 import React from 'react'
+
 import ItineraryCategory from '../ItineraryCategory/ItineraryCategory'
 
 const findCategories = (categories) => {
@@ -25,12 +26,10 @@ const findCategories = (categories) => {
 const  Itinerary = (props) => {
     const itineraryCategoryNames = props.info.map( e => e.itinerary_name)
     const categories = findCategories(itineraryCategoryNames)
-    console.log(categories)
-    console.log(props.info)
-        return(
-            <div className='col-12' style={{}}>
+            return(
+            <div className='col-12'>
                 <h3>Itinerary</h3>
-                <div className='row' style={{}}>
+                <div className='row'>
                     {
                         categories.map( category => {
                             return(
