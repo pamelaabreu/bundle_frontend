@@ -10,6 +10,10 @@ import Home from './components/Home/Home';
 import FirebaseAuthContext from './context/FirebaseAuth';
 
 class App extends Component {
+    state = {
+        user: null
+    }
+
     render () {
         return (
             <div className="App">
