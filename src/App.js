@@ -15,6 +15,16 @@ class App extends Component {
         user: null
     }
 
+    componentDidMount () {
+        this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+            if(user){
+                this.setState({ user });
+            } else {
+                this.setState({ user: null });
+            }
+        })
+    }
+
     render () {
         return (
             <HashRouter>
