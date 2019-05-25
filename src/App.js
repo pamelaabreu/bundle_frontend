@@ -16,17 +16,17 @@ class App extends Component {
 
     render () {
         return (
-            <div className="App">
-                <HashRouter>
-                    <Route path='/' component={Navbar} />
-                    <div>
-                        <Switch>
-                            <Route path='/trip' exact component={Trip}></Route>
-                            <Route path='/' exact component={Home} />
-                        </Switch>
-                    </div>
-                </HashRouter>
-            </div>
+            <HashRouter>
+                <div className="App">
+                        <Route path='/' component={Navbar} />
+                        <div>
+                            <Switch>
+                                <Route path='/trip' exact component={Trip}></Route>
+                                <Route path='/' exact component={Home} />
+                            </Switch>
+                        </div>
+                </div>
+            </HashRouter>
         );
     }
 }
