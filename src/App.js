@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Switch, Route, HashRouter} from 'react-router-dom';
+import firebase from './firebase';
 
 // Pages
 import Trip from './containers/Trip/Trip';
