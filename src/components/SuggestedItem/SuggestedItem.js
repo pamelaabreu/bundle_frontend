@@ -46,7 +46,7 @@ export default props => {
             <span className="item--title--font">{name}</span>
           </div>
         </div>
-        <div className="col-12" onClick={handleClick("select", index)}>
+        <div className="col-12">
           <div className={"row align-items-center justify-content-center mt-3"}>
             <span className="item--bundle--font">Pack</span>
           </div>
