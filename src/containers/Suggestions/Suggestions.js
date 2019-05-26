@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { getDuration, getSuggestions } from '../../services/suggestions';
+import React, { useEffect, useState } from "react";
+import { getSuggestions } from "../../services/suggestions";
+import axios from "axios";
+import './Suggestions.css';
 
 export default (props) => {
 
