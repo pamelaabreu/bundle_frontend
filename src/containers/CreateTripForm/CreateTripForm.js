@@ -2,26 +2,11 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import "./CreateTripForm.css";
 
-// FORMULATING DATE RESTRICTIONS
-let today = new Date();
-let tomorrow = ''
-
-let dd = today.getDate(); // today
-let dd2 = today.getDate() + 1; // tomorrow
-let mm = today.getMonth() + 1;
-let yyyy = today.getFullYear();
-if (dd < 10) {
-    dd = "0" + dd;
-}
-if (mm < 10) {
-    mm = "0" + mm;
-}
-
-today = yyyy + "-" + mm + "-" + dd;
-tomorrow = yyyy + "-" + mm + "-" + dd2;
-
-
 export default props => {
+
+    let today = moment().format("YYYY-MM-DD");
+    let tomorrow = moment().add(1, "day").format("YYYY-MM-DD");
+
     return (
         <div className="create-trip-form">
             <form className="">
