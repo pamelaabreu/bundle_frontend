@@ -9,6 +9,7 @@ export default props => {
     const [categories, setCategories] = useState(null);
     const [items, setItems] = useState(null);
     const [displayItems, setDisplayItems] = useState(null);
+    const [currCategory, setCurrCategory] = useState(null);
 
     useEffect(() => {
         const allTheItems = getSuggestions(duration);
@@ -28,15 +29,27 @@ export default props => {
 
     useEffect(() => {
         if (!items) return;
-        setDisplayItems(items.clothing);
+        if (!currCategory) setDisplayItems(items.clothing);
+        else setDisplayItems(items.currCategory);
     }, [items]);
 
+    // useEffect(() => {
+
+    // }, [displayItems])
+
     const handleCategoryClick = category => e => {
+        setCurrCategory(category);
         setDisplayItems(items[category]);
     };
 
-    const handleItemClick = item => e => {
-        console.log(item, "item");
+    const handleItemClick = (itemName, i) => e => {
+        const currentItem = displayItems[i]
+        console.log(currentItem, 'curr')
+        const newItems = items
+
+        newItems[currentItem.category][i].pack = !newItems[currentItem.category][i].pack
+        setItems(newItems)
+        // setDisplayItems(newItems[currentItem.category])
     };
 
   // const handleBundle = () => {
@@ -83,11 +96,12 @@ export default props => {
         <div className="suggestions-items">
             {displayItems
             ? displayItems.map((e, i) => {
+                const color = (e.pack)? " btn-primary ": " btn-secondary ";
                 return (
                     <div
-                    className="btn btn-secondary"
+                    className={"m-1 btn "+ color }
                     key={i}
-                    onClick={handleItemClick(e.name)}
+                    onClick={handleItemClick(e.name, i)}
                     >
                     <h6>{e.name}</h6>
                     </div>
