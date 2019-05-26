@@ -1,14 +1,17 @@
 import React from 'react'
 import moment from 'moment'
 
+
 const WeatherCard = (props) => {
-    const { weather, index } = props
+    const { weather } = props
+
     return(
-        <div className={`card ${ index!==0?' ml-3 ':null }`}>
+        <div className='card ml-2'>
             <div className='card-body'>
                 <h6 className='card-title'>{moment.unix(weather.time).format('llll').slice(0,3)}</h6>
-                <p className='card-text'>{weather.temperatureHigh} F</p>
-                <p className='card-text'>{weather.temperatureLow} F</p>
+                <img src={require(`../../assets/images/weather-icons/${weather.icon.replace('/-+','_')}.svg`)} alt='' style={{ width:'75%' }} />
+                <p className='card-text'>Hi: {Math.trunc(weather.temperatureHigh)}&#176; F</p>
+                <p className='card-text'>Lo: {Math.trunc(weather.temperatureLow)}&#176; F</p>
             </div>
         </div>
     )

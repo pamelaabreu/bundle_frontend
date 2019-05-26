@@ -8,7 +8,6 @@ import Itinerary from '../../components/Itinerary/Itinerary'
 import Weather from '../../components/Weather/Weather'
 
 const baseURL = 'http://localhost:5000'
-const tripEndpointBase = '/trip/'
 const itineraryEndpointBase = '/itinerary/'
 const weatherEndpointBase = '/weather/'
 
@@ -37,9 +36,6 @@ class Trip extends Component {
             baseURL,
         })
         
-
-        console.log(APIKEYS.MQ_API_KEY)
-
         const location = `${this.state.trip.city} ${this.state.trip.country}`
         const mqLocation = await axios({
             method:'get',
@@ -66,21 +62,25 @@ class Trip extends Component {
 
     }
     render() {
-        console.log(moment().endOf(this.state.trip.departure_date).to(this.state.trip.return_date))
         const { city, country, departure_date, return_date } = this.state.trip
         return(
             <div className='container mt-5'>
-                <div className='row'>
-                    <h1>{ city }, { country }</h1>
-                    <div className='col-1'></div>
-                    <div className='' style={{}}>
-                        <p style={{ margin:'0' }}><span>{ departure_date.format('L') }</span> - <span>{ return_date.format('L') }</span></p>
-                        <p style={{ textAlign:'center', margin:'0' }}>{ moment().endOf(departure_date).to(return_date) }</p>
+                <div className='row justify-content-between'>
+                    <div className='col-lg-4' >
+                        <div>
+                            <h5>Trip Details</h5>
+                            <p style={{ fontSize:'3.5rem' }}>{ city }, { country }</p>
+                        </div>
+                        <div>
+                            <p>{ moment().endOf(departure_date).to(return_date) }</p>
+                        </div>
+                    </div>
+                    <div className='col-lg-8'>
+                        <Weather weatherInfo={ this.state.weather_info } />
                     </div>
                 </div>
-                <div className='row'>
+                <div className='col-10 row mt-3'>
                     <Itinerary info={ this.state.itinerary } trip={ this.state.trip } />
-                    <Weather weatherInfo={ this.state.weather_info }/>
                 </div>
             </div>
         )
