@@ -52,10 +52,31 @@ const Home = props => {
 
     return (
         <>
+            {show ? (
+                <Modal 
+                    duration={duration} 
+                    show={show}
+                    handleShow={handleShow}
+                    handleClose={handleClose} 
+                    modalButtonText={"Bundle It!"}
+                    modalContent={"Hello world"}
+                /> 
+            ) : ( 
+                null )}
+
             <div className='bundleHomeImage'>
                 <h1 className='bundleHomeImageTitle'>Bundle</h1>
                 <h2 className='bundleHomeImageTagline'>Worry less, travel more!</h2>
-                <CreateTripForm />
+                <CreateTripForm 
+                    destination={destination}
+                    destinationHandler={destinationHandler}
+                    departureDate={departureDate}
+                    departureDateHandler={departureDateHandler}
+                    returnDate={returnDate}
+                    returnDateHandler={returnDateHandler}
+                    duration={duration}
+                    createTripHandler={createTripHandler}
+                />
             </div>
 
             <div className='bundleHomeArrow'></div>
@@ -66,7 +87,7 @@ const Home = props => {
                         <div className='bundleHomeWhatPhotoBox'></div>
                     </div>
                     <div className="col-sm">
-                        <h2>What's Bundle</h2>
+                        <h2>What's Bundle?</h2>
                         <p>
                             We provide a trip-management hub for inexperienced
                             travelers to keep track of all their necessities.
