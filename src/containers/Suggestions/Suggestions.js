@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getSuggestions } from "../../services/suggestions";
 import axios from "axios";
-import './Suggestions.css';
+import "./Suggestions.css";
 
 export default props => {
     const { duration } = props;
@@ -28,13 +28,16 @@ export default props => {
 
     useEffect(() => {
         if (!items) return;
-        setDisplayItems(items.clothing)
-    }, [items])
+        setDisplayItems(items.clothing);
+    }, [items]);
 
     const handleCategoryClick = category => e => {
-        setDisplayItems(items[category])
-        console.log(displayItems);
-    }
+        setDisplayItems(items[category]);
+    };
+
+    const handleItemClick = item => e => {
+        console.log(item, "item");
+    };
 
   // const handleBundle = () => {
   //     axios({
@@ -62,14 +65,36 @@ export default props => {
         <h4>Remove any items you won't need</h4>
         {categories ? (
             <>
-            <div className='suggestions-categories my-2'>
-            {categories.map(e => {
-                return <button key={e.id} onClick={handleCategoryClick(e.name)} className='mx-2 btn border btn-info rounded'>{e.name}</button>;
-            })}
+            <div className="suggestions-categories my-2">
+                {categories.map(e => {
+                return (
+                    <button
+                    key={e.id}
+                    onClick={handleCategoryClick(e.name)}
+                    className="mx-2 btn border btn-info rounded"
+                    >
+                    {e.name}
+                    </button>
+                );
+                })}
             </div>
             </>
         ) : null}
-        {}
+        <div className="suggestions-items">
+            {displayItems
+            ? displayItems.map((e, i) => {
+                return (
+                    <div
+                    className="btn btn-secondary"
+                    key={i}
+                    onClick={handleItemClick(e.name)}
+                    >
+                    <h6>{e.name}</h6>
+                    </div>
+                );
+                })
+            : null}
+        </div>
         <button
             className="btn btn-secondary rounded"
             // onClick={handleBundle}
