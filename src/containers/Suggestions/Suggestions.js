@@ -57,6 +57,25 @@ export default props => {
   // };
 
     return (
-        <h1>Here are the items we suggest for your {props.duration} day trip</h1>
-    )
-}
+        <>
+        <h2>Here's what we recommend taking for your {duration} day trip:</h2>
+        <h4>Remove any items you won't need</h4>
+        {categories ? (
+            <>
+            <div className='suggestions-categories my-2'>
+            {categories.map(e => {
+                return <button key={e.id} onClick={handleCategoryClick(e.name)} className='mx-2 btn border btn-info rounded'>{e.name}</button>;
+            })}
+            </div>
+            </>
+        ) : null}
+        {}
+        <button
+            className="btn btn-secondary rounded"
+            // onClick={handleBundle}
+        >
+            Bundle It!
+        </button>
+        </>
+    );
+};
