@@ -4,7 +4,7 @@ import "./SuggestedItem.css";
 export default props => {
   const {
     // flag,
-    handleClick,
+    createHandleClick,
     image,
     name,
     pack,
@@ -18,7 +18,7 @@ export default props => {
     <div className={"p-0 m-1"}>
       <button
         className={toBePacked + borderColor + " item rounded"}
-        onClick={handleClick("bundle", index)}
+        onClick={createHandleClick("bundle", index)}
       >
         <div className="container">
           <div className={"row align-items-center justify-content-center"}>
