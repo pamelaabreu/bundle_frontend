@@ -8,12 +8,11 @@ const Modal = props => {
     return (
         <>
         <div className={props.show ? "displayModal flipOutY" : "displayNone"}>
-            <div className="displayModalMain">
+            <div className="displayModalMain rounded">
                 <button className="modalCloseButton" onClick={props.handleClose}>
                     x
                 </button>
                 <div className="modalContent">
-                    {props.modalContent}
                     <Suggestions duration={props.duration}/>
                 </div>
             </div>
