@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 import CreateTripForm from '../../containers/CreateTripForm/CreateTripForm';
+import Modal from "../../containers/Modal/Modal";
+import { getDuration } from '../../services/suggestions';
+
 
 const Home = props => {
     return (
