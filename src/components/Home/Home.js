@@ -6,6 +6,50 @@ import { getDuration } from '../../services/suggestions';
 
 
 const Home = props => {
+
+    const [destination, setDestination] = useState("");
+    const [departureDate, setDepartureDate] = useState("");
+    const [returnDate, setReturnDate] = useState("");
+    const [duration, setDuration] = useState(null);
+    const [show, showmodal] = useState(false);
+
+    const destinationHandler = e => {
+        setDestination(e.target.value);
+    };
+
+    const departureDateHandler = e => {
+        setDepartureDate(e.target.value);
+    };
+
+    const returnDateHandler = e => {
+        setReturnDate(e.target.value);
+    };
+
+    const createTripHandler = e => {
+        e.preventDefault();
+        let tripDuration = getDuration(departureDate, returnDate)
+        if (tripDuration.slice(' ')[0] === 'a') {
+            tripDuration = 1
+        }
+        else {
+            tripDuration = tripDuration.slice(' ')[0]
+        }
+        setDuration(tripDuration)
+        showmodal(true);
+    };
+
+    const handleShow = () => showmodal(true);
+
+    const handleClose = () => showmodal(false);
+    // should this be part of useEffect cleanup?
+
+    useEffect(() => {
+        console.log(departureDate, "changed");
+        console.log(returnDate, "changed!!!");
+        console.log(duration, "duration now set")
+    }, [destination, departureDate, returnDate, duration])
+
+
     return (
         <>
             <div className='bundleHomeImage'>
