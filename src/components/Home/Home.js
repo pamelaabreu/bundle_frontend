@@ -41,7 +41,6 @@ const Home = props => {
     const handleShow = () => showmodal(true);
 
     const handleClose = () => showmodal(false);
-    // should this be part of useEffect cleanup?
 
     useEffect(() => {
         console.log(departureDate, "changed");
@@ -59,7 +58,6 @@ const Home = props => {
                     handleShow={handleShow}
                     handleClose={handleClose} 
                     modalButtonText={"Bundle It!"}
-                    modalContent={"Hello world"}
                 /> 
             ) : ( 
                 null )}
