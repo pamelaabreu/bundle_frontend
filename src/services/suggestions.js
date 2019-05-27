@@ -62,4 +62,19 @@ const randomTripNameGenerator = cityName =>
   "" +
   Math.floor(Math.random() * 10);
 
-export { getDuration, getSuggestions, randomTripNameGenerator };
+const splitDestination = destination => {
+  let obj = null;
+  if (destination.includes(",")) {
+    obj = destination.split(",").map(e => e.trim());
+  } else {
+    obj = destination.trim().split(" ");
+  }
+  return { city: obj[0], country: obj[obj.length - 1] };
+};
+
+export {
+  getDuration,
+  getSuggestions,
+  randomTripNameGenerator,
+  splitDestination
+};
