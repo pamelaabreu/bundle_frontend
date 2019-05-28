@@ -26,10 +26,10 @@ const Home = props => {
   const createTripHandler = e => {
     e.preventDefault();
     let tripDuration = getDuration(departureDate, returnDate);
-    if (tripDuration.slice(" ")[0] === "a") {
+    if (tripDuration.split(" ")[0] === "a") {
       tripDuration = 1;
     } else {
-      tripDuration = tripDuration.slice(" ")[0];
+      tripDuration = tripDuration.split(" ")[0];
     }
     setDuration(tripDuration);
     showmodal(true);
