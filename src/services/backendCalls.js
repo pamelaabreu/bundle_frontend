@@ -18,7 +18,6 @@ const BASE_URL = "http://localhost:5000";
 
 const createTrip = (destination, departureDate, returnDate, user_id = null) => {
   let temp = splitDestination(destination);
-
   let name = randomTripNameGenerator(temp.city);
 
   return axios({
@@ -46,4 +45,30 @@ const createBag = (trip_id, type_id) => {
   });
 };
 
-export { createTrip };
+const buildBundle = (
+  items,
+  destination,
+  departureDate,
+  returnDate,
+  user_id = null
+) => {
+  return createTrip(
+    destination,
+    departureDate,
+    returnDate,
+    (user_id = null)
+  ).then(({ data: { id } }) => {
+    const personal = createBag(id, 1);
+    const carry_on = createBag(id, 2);
+    const checked = createBag(id, 3);
+    return Promise.all([personal, carry_on, checked]);
+  });
+  // .then((data) => {
+  //     console.log(data);
+  // })
+  // .catch(err => {
+  //     console.log(err);
+  // })
+};
+
+export { createTrip, buildBundle };
