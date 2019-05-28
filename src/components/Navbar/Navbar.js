@@ -21,7 +21,7 @@ const Navbar = props => {
             <Link to='packHacks'>Pack Hacks</Link>
             <Link to='/tsaGuides'>TSA Guides</Link>
             <Link to='/about'>About</Link>
-            {!FirebaseUserAuth.user ? null : <button>Logout</button>}
+            {!FirebaseUserAuth.user ? null : <button onClick={UserLogout}>Logout</button>}
         </div>
     );
 };
