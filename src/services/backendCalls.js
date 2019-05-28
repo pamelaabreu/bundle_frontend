@@ -35,4 +35,15 @@ const createTrip = (destination, departureDate, returnDate, user_id = null) => {
   });
 };
 
+const createBag = (trip_id, type_id) => {
+  return axios({
+    method: "post",
+    url: BASE_URL + "/bag/",
+    data: {
+      trip_id,
+      type_id
+    }
+  });
+};
+
 export { createTrip };
