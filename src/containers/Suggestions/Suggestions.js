@@ -11,6 +11,7 @@ export default props => {
   const [items, setItems] = useState(null);
   const [displayItems, setDisplayItems] = useState(null);
   const [currCategory, setCurrCategory] = useState(null);
+  const [newDisplay, setNewDisplay] = useState(null);
 
   useEffect(() => {
     const allTheItems = getSuggestions(duration);
@@ -26,17 +27,22 @@ export default props => {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [duration]);
 
   useEffect(() => {
     if (!items) return;
     if (!currCategory) setDisplayItems(items.clothing);
-    else setDisplayItems(items.currCategory);
-  }, [items]);
+  }, [items, currCategory]);
 
-  // useEffect(() => {
-
-  // }, [displayItems])
+  useEffect(() => {
+    if (newDisplay) {
+      if (newDisplay.update) {
+        setDisplayItems(newDisplay.items);
+        setNewDisplay({ items: {}, update: false });
+      }
+      return;
+    }
+  }, [newDisplay]);
 
   const handleCategoryClick = category => e => {
     setCurrCategory(category);
@@ -45,19 +51,12 @@ export default props => {
 
   const handleItemClick = (itemName, i) => e => {
     const currentItem = displayItems[i];
-    console.log(currentItem, "curr");
-    const newItems = items;
-    console.log("before", newItems[currentItem.category][i]);
-    newItems[currentItem.category][i].pack = !newItems[currentItem.category][i]
-      .pack;
-    console.log("after", newItems[currentItem.category][i]);
-    console.log("items after", newItems);
-    setItems(newItems);
-    // setDisplayItems(newItems[currentItem.category])
+    items[currentItem.category][i].pack = !items[currentItem.category][i].pack;
+    setItems(items);
+    setNewDisplay({ items: items[currentItem.category], update: true });
   };
 
   const handleBundle = () => {
-    console.log(destination, "destin");
     createTrip(destination, departureDate, returnDate)
       .then(res => {
         console.log(res);
@@ -73,44 +72,19 @@ export default props => {
       <h4>Remove any items you won't need</h4>
       {categories ? (
         <>
-          <h2>Here's what we recommend taking for your {duration} day trip:</h2>
-          <h4>Remove any items you won't need</h4>
-          {categories ? (
-            <>
-              <div className="suggestions-categories my-2">
-                {categories.map(e => {
-                  return (
-                    <button
-                      key={e.id}
-                      onClick={handleCategoryClick(e.name)}
-                      className="mx-2 btn border btn-info rounded"
-                    >
-                      {e.name}
-                    </button>
-                  );
-                })}
-              </div>
-            </>
-          ) : null}
-          <div className="suggestions-items">
-            {displayItems
-              ? displayItems.map((e, i) => {
-                  const color = e.pack ? " btn-primary " : " btn-secondary ";
-                  return (
-                    <div
-                      className={"m-1 btn " + color}
-                      key={i}
-                      onClick={handleItemClick(e.name, i)}
-                    >
-                      <h6>{e.name}</h6>
-                    </div>
-                  );
-                })
-              : null}
+          <div className="suggestions-categories my-2">
+            {categories.map(e => {
+              return (
+                <button
+                  key={e.id}
+                  onClick={handleCategoryClick(e.name)}
+                  className="mx-2 btn border btn-info rounded"
+                >
+                  {e.name}
+                </button>
+              );
+            })}
           </div>
-          <button className="btn btn-secondary rounded" onClick={handleBundle}>
-            Bundle It!
-          </button>
         </>
       ) : null}
       <div className="suggestions-items">
@@ -129,10 +103,7 @@ export default props => {
             })
           : null}
       </div>
-      <button
-        className="btn btn-secondary rounded"
-        // onClick={handleBundle}
-      >
+      <button className="btn btn-secondary rounded" onClick={handleBundle}>
         Bundle It!
       </button>
     </>
