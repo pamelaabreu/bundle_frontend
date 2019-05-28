@@ -47,32 +47,25 @@ export default props => {
     const currentItem = displayItems[i];
     console.log(currentItem, "curr");
     const newItems = items;
-
+    console.log("before", newItems[currentItem.category][i]);
     newItems[currentItem.category][i].pack = !newItems[currentItem.category][i]
       .pack;
+    console.log("after", newItems[currentItem.category][i]);
+    console.log("items after", newItems);
     setItems(newItems);
     // setDisplayItems(newItems[currentItem.category])
   };
 
-  // const handleBundle = () => {
-  //     axios({
-  //     method: "post",
-  //     url: "http://localhost:5000/trip",
-  //     data: {
-  //         name: "",
-  //         city: "",
-  //         country: "",
-  //         departure_date: "",
-  //         return_date: ""
-  //     }
-  //     })
-  //     .then(res => {
-  //         console.log(res);
-  //     })
-  //     .catch(err => {
-  //         console.log(err);
-  //     });
-  // };
+  const handleBundle = () => {
+    console.log(destination, "destin");
+    createTrip(destination, departureDate, returnDate)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
