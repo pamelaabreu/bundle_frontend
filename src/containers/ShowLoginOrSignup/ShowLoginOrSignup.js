@@ -9,6 +9,8 @@ const ShowLoginOrSignup = props => {
 
   return (
     <>
+      <button onClick={() => setLoginOrSignup(true)}>Login</button>
+      <button onClick={() => setLoginOrSignup(false)}>Signup</button>
       <div>{showLoginOrSignup ? <Login /> : <Signup />}</div>
     </>
   );
