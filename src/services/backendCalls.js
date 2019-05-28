@@ -13,6 +13,7 @@ user off
 
 import axios from "axios";
 import { randomTripNameGenerator, splitDestination } from "./suggestions";
+import { arrayExpression } from "@babel/types";
 
 const BASE_URL = "http://localhost:5000";
 
@@ -71,7 +72,7 @@ const buildBundle = (
   // })
 };
 
-const createItem = (name, quantity, bag_id, category_id, packed = false) => {
+const createItem = (name, quantity, category_id, bag_id, packed = false) => {
   return axios({
     method: "post",
     url: BASE_URL + "/items/",
@@ -83,6 +84,30 @@ const createItem = (name, quantity, bag_id, category_id, packed = false) => {
       packed
     }
   });
+};
+
+const itemPromises = (items, personal_id, carry_on_id, checked_id) => {
+  const categories = Object.keys(items);
+  const promiseArr = [];
+  for (let category of categories) {
+    for (let e of items[category]) {
+      if (e.pack) {
+        if (e.bag_type === "personal")
+          promiseArr.push(
+            createItem(e.name, e.quantity, e.category, personal_id)
+          );
+        if (e.bag_type === "carry-on")
+          promiseArr.push(
+            createItem(e.name, e.quantity, e.category, carry_on_id)
+          );
+        if (e.bag_type === "checked")
+          promiseArr.push(
+            createItem(e.name, e.quantity, e.category, checked_id)
+          );
+      }
+    }
+  }
+  return promiseArr;
 };
 
 export { createTrip, buildBundle };
