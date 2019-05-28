@@ -2,6 +2,8 @@ import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
+import FirebaseAuthContext from '../../context/FirebaseAuth';
+
 const Navbar = props => {
     return (
         <div className='bundleNavbar'>
