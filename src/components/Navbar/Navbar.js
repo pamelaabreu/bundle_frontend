@@ -2,10 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-// Pages
-import Signup from "../../containers/Signup/Signup";
-import Login from "../../containers/Login/Login";
-
 // Context
 import FirebaseAuthContext from "../../context/FirebaseAuth";
 
