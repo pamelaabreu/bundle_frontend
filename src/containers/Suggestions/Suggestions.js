@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getSuggestions } from "../../services/suggestions";
 import axios from "axios";
-import { createTrip } from "../../services/backendCalls";
+import { buildBundle } from "../../services/backendCalls";
 import "./Suggestions.css";
 
 export default props => {
@@ -57,7 +57,7 @@ export default props => {
   };
 
   const handleBundle = () => {
-    createTrip(destination, departureDate, returnDate)
+    buildBundle(items, destination, departureDate, returnDate)
       .then(res => {
         console.log(res);
       })
