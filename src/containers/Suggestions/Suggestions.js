@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { getSuggestions } from "../../services/suggestions";
 import axios from "axios";
 import { buildBundle } from "../../services/backendCalls";
 import "./Suggestions.css";
 
-export default props => {
+export default withRouter(props => {
   const { destination, duration, departureDate, returnDate } = props;
 
   const [categories, setCategories] = useState(null);
@@ -60,6 +61,7 @@ export default props => {
     buildBundle(items, destination, departureDate, returnDate)
       .then(res => {
         console.log(res);
+        props.history.push("/trip/" + res);
       })
       .catch(err => {
         console.log(err);
@@ -69,7 +71,7 @@ export default props => {
   return (
     <>
       <h2>Here's what we recommend taking for your {duration} day trip:</h2>
-      <h4>Remove any items you won't need</h4>
+      <h4>De-select any items you won't need</h4>
       {categories ? (
         <>
           <div className="suggestions-categories my-2">
@@ -108,4 +110,4 @@ export default props => {
       </button>
     </>
   );
-};
+});
