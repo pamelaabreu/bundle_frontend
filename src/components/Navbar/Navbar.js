@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
+// Pages
+import ShowLoginOrSignup from "../../containers/ShowLoginOrSignup/ShowLoginOrSignup";
+
 // Context
 import FirebaseAuthContext from "../../context/FirebaseAuth";
 
@@ -24,7 +27,9 @@ const Navbar = props => {
       <Link to="packHacks">Pack Hacks</Link>
       <Link to="/tsaGuides">TSA Guides</Link>
       <Link to="/about">About</Link>
-      {!FirebaseUserAuth.user ? null : (
+      {!FirebaseUserAuth.user ? (
+        <ShowLoginOrSignup />
+      ) : (
         <button onClick={UserLogout}>Logout</button>
       )}
     </div>
