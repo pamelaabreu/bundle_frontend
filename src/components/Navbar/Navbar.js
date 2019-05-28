@@ -7,6 +7,11 @@ import FirebaseAuthContext from '../../context/FirebaseAuth';
 const Navbar = props => {
     const FirebaseUserAuth = useContext(FirebaseAuthContext);
 
+    const UserLogout = () => {
+        FirebaseUserAuth.logoutUser();
+        props.history.push("/");
+    };
+
     return (
         <div className='bundleNavbar'>
             <Link to='/'><div className='bundleNavbarLogo'>Logo</div></Link>
