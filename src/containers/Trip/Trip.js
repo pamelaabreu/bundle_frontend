@@ -9,6 +9,7 @@ import Weather from '../../components/Weather/Weather'
 
 const baseURL = 'http://localhost:5000'
 const itineraryEndpointBase = '/itinerary/'
+const tripEndpointBase = '/trip/'
 const weatherEndpointBase = '/weather/'
 
 
@@ -16,13 +17,7 @@ class Trip extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            trip:{
-                name: 'Anniversary',
-                country: 'Italy',
-                city: 'Rome',
-                departure_date: moment(),
-                return_date: moment().add(10, 'days')
-            },
+            trip:{},
             itinerary:[],
             weather_info:[]
         }
@@ -30,9 +25,18 @@ class Trip extends Component {
 
     async componentDidMount() {
         
+        const { trip_id:tripID } = this.props.match.params
+
+        const trip = await axios({
+            method:'get',
+            url:`${tripEndpointBase}${tripID}`,
+            baseURL
+        })
+
+        console.log('trip', trip)
         const itinerary = await axios({
             method: 'get',
-            url: `${itineraryEndpointBase}${1}`,
+            url: `${itineraryEndpointBase}${trip.data.id}`,
             baseURL,
         })
         
@@ -57,7 +61,8 @@ class Trip extends Component {
         
         this.setState({
             itinerary:itinerary.data,
-            weather_info:weather.data.data.slice(0,5)
+            weather_info:weather.data.data.slice(0,5),
+            trip:trip.data
             })
 
     }
