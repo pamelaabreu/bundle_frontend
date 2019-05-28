@@ -13,7 +13,6 @@ user off
 
 import axios from "axios";
 import { randomTripNameGenerator, splitDestination } from "./suggestions";
-import { arrayExpression } from "@babel/types";
 
 const BASE_URL = "http://localhost:5000";
 

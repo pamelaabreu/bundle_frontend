@@ -39,9 +39,7 @@ const Home = props => {
 
   const handleClose = () => showmodal(false);
 
-  useEffect(() => {
-    console.log(duration, "duration now set");
-  }, [destination, departureDate, returnDate, duration]);
+  useEffect(() => {}, [destination, departureDate, returnDate, duration]);
 
   return (
     <>

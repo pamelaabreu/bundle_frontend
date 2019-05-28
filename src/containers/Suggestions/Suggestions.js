@@ -60,7 +60,6 @@ export default withRouter(props => {
   const handleBundle = () => {
     buildBundle(items, destination, departureDate, returnDate)
       .then(res => {
-        console.log(res);
         props.history.push("/trip/" + res);
       })
       .catch(err => {
