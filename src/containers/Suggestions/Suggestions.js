@@ -73,19 +73,44 @@ export default props => {
       <h4>Remove any items you won't need</h4>
       {categories ? (
         <>
-          <div className="suggestions-categories my-2">
-            {categories.map(e => {
-              return (
-                <button
-                  key={e.id}
-                  onClick={handleCategoryClick(e.name)}
-                  className="mx-2 btn border btn-info rounded"
-                >
-                  {e.name}
-                </button>
-              );
-            })}
+          <h2>Here's what we recommend taking for your {duration} day trip:</h2>
+          <h4>Remove any items you won't need</h4>
+          {categories ? (
+            <>
+              <div className="suggestions-categories my-2">
+                {categories.map(e => {
+                  return (
+                    <button
+                      key={e.id}
+                      onClick={handleCategoryClick(e.name)}
+                      className="mx-2 btn border btn-info rounded"
+                    >
+                      {e.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          ) : null}
+          <div className="suggestions-items">
+            {displayItems
+              ? displayItems.map((e, i) => {
+                  const color = e.pack ? " btn-primary " : " btn-secondary ";
+                  return (
+                    <div
+                      className={"m-1 btn " + color}
+                      key={i}
+                      onClick={handleItemClick(e.name, i)}
+                    >
+                      <h6>{e.name}</h6>
+                    </div>
+                  );
+                })
+              : null}
           </div>
+          <button className="btn btn-secondary rounded" onClick={handleBundle}>
+            Bundle It!
+          </button>
         </>
       ) : null}
       <div className="suggestions-items">
