@@ -71,4 +71,18 @@ const buildBundle = (
   // })
 };
 
+const createItem = (name, quantity, bag_id, category_id, packed = false) => {
+  return axios({
+    method: "post",
+    url: BASE_URL + "/items/",
+    data: {
+      name,
+      quantity,
+      bag_id,
+      category_id,
+      packed
+    }
+  });
+};
+
 export { createTrip, buildBundle };
