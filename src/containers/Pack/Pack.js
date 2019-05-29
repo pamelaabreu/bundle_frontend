@@ -1,5 +1,23 @@
 import React, { Component } from "react";
+import axios from 'axios';
+import UnpackedItem from "../../components/UnpackedItem";
 import "./Pack.css";
+
+const bag = (items = []) => {
+  return (
+    <div>
+      <div className="row px-3 col-6 col-md-4">
+        {items.map((e, i) => {
+          return (
+            <div className="col-6 col-sm-6 col-md-4 p-0" key={i}>
+              <UnpackedItem />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 export default (class Pack extends Component {
   constructor(props) {
@@ -7,41 +25,27 @@ export default (class Pack extends Component {
     this.state = {
       page: null,
       bags: null,
-      lists: null,
-      width: window.innerWidth
+      currentBag: null,
+      currentCategory: null,
+      lists: null
     };
-    this.handleResize = this.handleResize.bind(this);
   }
 
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
+  async componentDidMount() {
+    const { trip_id } = this.props.match.params;
+
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-  }
+  componentWillUnmount() {}
 
-  handleResize() {
-    this.setState({
-      width: window.innerWidth
-    });
-  }
+  handleResize = () => {};
 
   render() {
-    const { width } = this.state;
-    return (
-      <>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="home">Home</a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              {width}
-            </li>
-          </ol>
-        </nav>
-      </>
-    );
+    const { page } = this.state;
+    switch (page) {
+      case "bags":
+          return b
+    }
+    return <></>;
   }
 });
