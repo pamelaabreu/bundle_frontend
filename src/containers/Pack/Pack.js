@@ -119,10 +119,66 @@ export default (class Pack extends Component {
           })}
 
           {/* PACKED ITEMS */}
-          <div className="my-2 container">
+          {/* <div className="my-2 container">
             <div className="row">
               <div className="col-12 btn btn-primary">
                 <span className="">Packed Items</span>
+              </div>
+            </div>
+          </div> */}
+
+          <div className="accordion" id="accordionExample">
+            <div className="card">
+              <div className="card-header " id="headingOne">
+                <h2 className="mb-0">
+                  <button
+                    className="col-12 btn btn-link collapsed"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Packed Items
+                  </button>
+                </h2>
+              </div>
+
+              <div
+                id="collapseOne"
+                className="collapse"
+                aria-labelledby="headingOne"
+                data-parent="#accordionExample"
+              >
+                <div className="card-body">
+                  PACKED ITEMS
+                </div>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-header" id="headingTwo">
+                <h2 className="mb-0">
+                  <button
+                    className="col-12 btn btn-link"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    UNPACKED ITEMS
+                  </button>
+                </h2>
+              </div>
+              <div
+                id="collapseTwo"
+                className="collapse show"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                 UNPACKED ITEMS
+                </div>
               </div>
             </div>
           </div>
