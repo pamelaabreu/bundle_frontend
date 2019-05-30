@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import BASEURL from "../../services/backendUrlConnect";
 import UnpackedItem from "../../components/UnpackedItem/UnpackedItem";
+import BagSelector from "../../components/BagSelectorCard/BagSelectorCard";
 import "./Pack.css";
 
 const bag = (items = []) => {
@@ -25,13 +26,16 @@ export default (class Pack extends Component {
     super(props);
     this.state = {
       tripInfo: null,
+      categories: null,
       page: null,
       bags: null,
+      bagTypes: { 1: "Personal", 2: "Carry-On", 3: "Checked" },
       currentBag: null,
       currentCategory: null,
-      lists: null
+      lists: null,
+      loading: true
     };
-  };
+  }
 
   async componentDidMount() {
     const { trip_id } = this.props.match.params;
@@ -44,14 +48,24 @@ export default (class Pack extends Component {
       url: BASEURL + "/categories/all"
     });
     try {
-      const [tripDetails, categories] = await Promise.all([
+      const [{ data: tripDetails }, { data: categories }] = await Promise.all([
         tripBagsAndLists,
         allCategories
       ]);
-      console.log(tripDetails, categories)
+      this.setState({
+        tripInfo: tripDetails.trip,
+        categories,
+        bags: tripDetails.bags,
+        loading: false
+      });
+      console.log(tripDetails, categories);
     } catch (err) {
       console.log("ERROR: ", err);
-    };
+    }
+  }
+
+  handleOnClick = (name, index) => e => {
+    console.log(name, index);
   };
 
   componentWillUnmount() {}
@@ -59,11 +73,68 @@ export default (class Pack extends Component {
   handleResize = () => {};
 
   render() {
-    const { page } = this.state;
-    switch (page) {
-      case "bags":
-        return;
-    }
-    return <></>;
+    const { loading, page, bags, bagTypes } = this.state;
+
+    // const { page } = this.state;
+    // switch (page) {
+    //   case "bags":
+    //     return;
+    // }
+    // return <></>;
+
+    return (
+      <>
+        {loading ? (
+          <h1>Loading</h1>
+        ) : (
+          <div className="container">
+            <div className="row">
+              <div className="col-10">
+                <button className="btn">
+                  <span>Packing</span>
+                </button>
+                <button className="btn ">
+                  <span className="text-muted">Reminder</span>
+                </button>
+              </div>
+              <div className="col-2">
+                <div className="row">
+                  <span className="col-12 text-center">Trip</span>
+                  <i className="col-12 fas fa-long-arrow-alt-left" />
+                </div>
+              </div>
+            </div>
+
+            {/*  BAG SELECTOR  */}
+            <div className="row justify-content-around ">
+              {bags.map((e, i) => {
+                return (
+                  <BagSelector
+                    {...e}
+                    bag_type={bagTypes[e.type_id]}
+                    key={bagTypes[e.bag_type]}
+                    handleOnClick={this.handleOnClick}
+                    item_count={12}
+                  />
+                );
+              })}
+
+              {/* PACKED ITEMS */}
+              <div className="my-2 container">
+                <div className="row">
+                  <div className="col-12 btn btn-primary">
+                    <span className="">Packed Items</span>
+                  </div>
+                </div>
+              </div>
+
+       
+
+              {/* */}
+            </div>
+          </div>
+        )}
+      </>
+    );
   }
 });
