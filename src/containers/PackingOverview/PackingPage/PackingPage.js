@@ -55,8 +55,8 @@ export default (class Pack extends Component {
   };
 
   render() {
-    const { bags, bagTypes } = this.props;
-
+    const { bags } = this.props;
+    const { bagTypes } = this.state;
     return (
       <div className="container">
         {/*  BAG SELECTOR  */}
