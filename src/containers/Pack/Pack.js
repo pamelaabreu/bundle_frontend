@@ -27,7 +27,7 @@ export default (class Pack extends Component {
     this.state = {
       tripInfo: null,
       categories: null,
-      page: null,
+      page: "packing",
       bags: null,
       bagTypes: { 1: "Personal", 2: "Carry-On", 3: "Checked" },
       currentBag: null,
@@ -66,73 +66,114 @@ export default (class Pack extends Component {
 
   handleOnClick = (name, index) => e => {
     console.log(name, index);
+
+    switch (name) {
+      case "packing":
+        this.setState({ page: name });
+      case "reminders":
+        this.setState({ page: name });
+      default:
+        return;
+    }
   };
 
   componentWillUnmount() {}
+
+  renderPack = (bags, bagTypes) => {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-10">
+            <button className="btn" onClick={this.handleOnClick("packing")}>
+              <span>Packing</span>
+            </button>
+            <button className="btn ">
+              <span
+                className="text-muted"
+                onClick={this.handleOnClick("reminders")}
+              >
+                Reminder
+              </span>
+            </button>
+          </div>
+          <div className="col-2">
+            <div className="row">
+              <span className="col-12 text-center">Trip</span>
+              <i className="col-12 fas fa-long-arrow-alt-left" />
+            </div>
+          </div>
+        </div>
+
+        {/*  BAG SELECTOR  */}
+        <div className="row justify-content-around ">
+          {bags.map((e, i) => {
+            return (
+              <BagSelector
+                {...e}
+                bag_type={bagTypes[e.type_id]}
+                key={bagTypes[e.bag_type]}
+                handleOnClick={this.handleOnClick}
+                item_count={12}
+              />
+            );
+          })}
+
+          {/* PACKED ITEMS */}
+          <div className="my-2 container">
+            <div className="row">
+              <div className="col-12 btn btn-primary">
+                <span className="">Packed Items</span>
+              </div>
+            </div>
+          </div>
+
+          {/* */}
+        </div>
+      </div>
+    );
+  };
+
+  renderReminders = () => {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-10">
+            <button className="btn" onClick={this.handleOnClick("packing")}>
+              <span>Packing</span>
+            </button>
+            <button className="btn ">
+              <span
+                className="text-muted"
+                onClick={this.handleOnClick("reminders")}
+              >
+                Reminder
+              </span>
+            </button>
+          </div>
+          <div className="col-2">
+            <div className="row">
+              <span className="col-12 text-center">Trip</span>
+              <i className="col-12 fas fa-long-arrow-alt-left" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   handleResize = () => {};
 
   render() {
     const { loading, page, bags, bagTypes } = this.state;
 
-    // const { page } = this.state;
-    // switch (page) {
-    //   case "bags":
-    //     return;
-    // }
-    // return <></>;
-
     return (
       <>
         {loading ? (
           <h1>Loading</h1>
+        ) : page === "packing" ? (
+          this.renderPack(bags, bagTypes)
         ) : (
-          <div className="container">
-            <div className="row">
-              <div className="col-10">
-                <button className="btn">
-                  <span>Packing</span>
-                </button>
-                <button className="btn ">
-                  <span className="text-muted">Reminder</span>
-                </button>
-              </div>
-              <div className="col-2">
-                <div className="row">
-                  <span className="col-12 text-center">Trip</span>
-                  <i className="col-12 fas fa-long-arrow-alt-left" />
-                </div>
-              </div>
-            </div>
-
-            {/*  BAG SELECTOR  */}
-            <div className="row justify-content-around ">
-              {bags.map((e, i) => {
-                return (
-                  <BagSelector
-                    {...e}
-                    bag_type={bagTypes[e.type_id]}
-                    key={bagTypes[e.bag_type]}
-                    handleOnClick={this.handleOnClick}
-                    item_count={12}
-                  />
-                );
-              })}
-
-              {/* PACKED ITEMS */}
-              <div className="my-2 container">
-                <div className="row">
-                  <div className="col-12 btn btn-primary">
-                    <span className="">Packed Items</span>
-                  </div>
-                </div>
-              </div>
-
-       
-
-              {/* */}
-            </div>
-          </div>
+          this.renderReminders()
         )}
       </>
     );
