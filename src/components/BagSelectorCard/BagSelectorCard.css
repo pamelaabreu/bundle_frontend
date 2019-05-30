@@ -1,3 +1,7 @@
+.pack--bag-height {
+    max-width: 200px;
+}
+
 .pack--bag-width {
-    width: 15rem;
+    max-width: 200px;
 }
