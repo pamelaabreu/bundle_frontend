@@ -12,9 +12,6 @@ export default (class Pack extends Component {
       categories: null,
       page: "packing",
       bags: null,
-      bagTypes: { 1: "Personal", 2: "Carry-On", 3: "Checked" },
-      currentBag: null,
-      currentCategory: null,
       lists: null,
       loading: true
     };
