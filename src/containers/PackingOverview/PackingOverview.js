@@ -35,7 +35,6 @@ export default (class Pack extends Component {
         tripBagsAndLists,
         allCategories
       ]);
-      console.log(tripDetails)
       this.setState({
         tripInfo: tripDetails.trip,
         categories,
@@ -43,15 +42,12 @@ export default (class Pack extends Component {
         lists: tripDetails.lists,
         loading: false
       });
-      console.log(tripDetails, categories);
     } catch (err) {
       console.log("ERROR: ", err);
     }
   }
 
   handleOnClick = (name, index) => e => {
-    console.log(name, index);
-
     switch (name) {
       case "packing":
         this.setState({ page: name });
