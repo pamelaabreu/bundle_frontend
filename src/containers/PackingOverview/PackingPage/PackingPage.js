@@ -21,7 +21,7 @@ import "./PackingPage.css";
 //   );
 // };
 
-export default (class Pack extends Component {
+export default (class PackPage extends Component {
   constructor(props) {
     super(props);
     this.state = {

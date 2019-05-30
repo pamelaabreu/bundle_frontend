@@ -4,7 +4,7 @@ import BASEURL from "../../services/backendUrlConnect";
 import PackingPage from "./PackingPage/PackingPage";
 import "./PackingOverview.css";
 
-export default (class Pack extends Component {
+export default (class PackingOverview extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -97,10 +97,9 @@ export default (class Pack extends Component {
         {loading ? (
           <h1>Loading</h1>
         ) : page === "packing" ? (
-          // ( this.renderPack(bags, bagTypes))
           <PackingPage bags={bags} bagTypes={bagTypes}/>
         ) : (
-        <h1>Reminders</h1>// <RemindersPage /> 
+        <h1>Reminders</h1>// <RemindersPage lists={} /> 
         )}
       </>
     );
