@@ -90,14 +90,14 @@ export default (class PackingOverview extends Component {
   };
 
   render() {
-    const { loading, page, bags, bagTypes } = this.state;
+    const { loading, page, bags } = this.state;
     return (
       <>
         {this.tabs(page)}
         {loading ? (
           <h1>Loading</h1>
         ) : page === "packing" ? (
-          <PackingPage bags={bags} bagTypes={bagTypes}/>
+          <PackingPage bags={bags} />
         ) : (
         <h1>Reminders</h1>// <RemindersPage lists={} /> 
         )}
