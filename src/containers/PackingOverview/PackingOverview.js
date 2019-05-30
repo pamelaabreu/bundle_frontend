@@ -81,7 +81,7 @@ export default (class PackingOverview extends Component {
           <div className="col-2">
             <div className="row">
               <span className="col-12 text-center">Trip</span>
-              <i className="col-12 fas fa-long-arrow-alt-left" />
+              <i className="col-12 fas fa-long-arrow-alt-left text-center pack--arrow-transform" />
             </div>
           </div>
         </div>
