@@ -3,6 +3,7 @@ import axios from "axios";
 import BASEURL from "../../services/backendUrlConnect";
 import PackingPage from "./PackingPage/PackingPage";
 import "./PackingOverview.css";
+import RemindersPage from "./RemindersPage/RemindersPage";
 
 export default (class PackingOverview extends Component {
   constructor(props) {
@@ -83,7 +84,7 @@ export default (class PackingOverview extends Component {
             </button>
             <button className="btn " onClick={this.handleOnClick("reminders")}>
               <span className={page === "packing" ? "text-muted" : ""}>
-                Reminder
+                Reminders
               </span>
             </button>
           </div>
@@ -99,7 +100,7 @@ export default (class PackingOverview extends Component {
   };
 
   render() {
-    const { loading, page, bags } = this.state;
+    const { loading, page, bags, lists, tripInfo } = this.state;
     return (
       <>
         {this.tabs(page)}
@@ -108,7 +109,11 @@ export default (class PackingOverview extends Component {
         ) : page === "packing" ? (
           <PackingPage bags={bags} />
         ) : (
-          <h1>Reminders</h1> // <RemindersPage lists={} />
+          <RemindersPage
+            lists={lists}
+            updateLists={this.updateLists}
+            trip_id={tripInfo.id}
+          />
         )}
       </>
     );
