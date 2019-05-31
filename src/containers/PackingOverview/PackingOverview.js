@@ -57,6 +57,18 @@ export default (class PackingOverview extends Component {
     }
   };
 
+  updateLists = () => {
+    const { trip_id } = this.props.match.params;
+
+    axios({
+      method: "get",
+      url: BASEURL + "/trip/init/" + trip_id
+    }).then(({ data: trip }) => {
+      console.log("trip.list", trip.lists);
+      this.setState({ lists: trip.lists });
+    });
+  };
+
   componentWillUnmount() {}
 
   tabs = page => {
