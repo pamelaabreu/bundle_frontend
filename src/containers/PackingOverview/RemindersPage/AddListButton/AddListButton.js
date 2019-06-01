@@ -26,14 +26,24 @@ const AddListButton = props => {
                 id="multiCollapseExample1"
               >
                 <div className="card card-body">
-                  Name of List
+                  Type of List
                   <hr />
                   <div className="input-group mb-3">
-                    <select className="custom-select" id="inputGroupSelect01">
+                    <select
+                      onChange={handleSelectList}
+                      className="custom-select"
+                      id="inputGroupSelect01"
+                    >
                       <option defaultValue>Choose one...</option>
-                      <option value="1">To-Do List</option>
-                      <option value="2">Shopping List</option>
+                      <option value="To-Do List">To-Do List</option>
+                      <option value="Shopping List">Shopping List</option>
                     </select>
+                    <button
+                      className="btn border border-info"
+                      onClick={createList}
+                    >
+                      Create
+                    </button>
                   </div>
                 </div>
               </div>
