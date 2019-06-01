@@ -1,9 +1,11 @@
 import React from "react";
 
-export default props => {
+const AddListButton = props => {
+  const { createList, handleSelectList } = props;
+
   return (
     <>
-      <div className="card" style={{ width: "18rem" }}>
+      <div className="m-3 card" style={{ width: "18rem" }}>
         <div className="card-body">
           <p>
             <a
@@ -42,3 +44,5 @@ export default props => {
     </>
   );
 };
+
+export default AddListButton;
