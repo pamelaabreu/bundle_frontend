@@ -8,6 +8,13 @@ export default props => {
   const [todoList, setTodoList] = useState(null);
   const [shoppingList, setShoppingList] = useState(null);
 
+  useEffect(() => {
+    if (!lists.length) return;
+    for (let list of lists) {
+      getList(list);
+    }
+  }, [lists]);
+
   const getList = list => {
     axios({
       method: "get",
