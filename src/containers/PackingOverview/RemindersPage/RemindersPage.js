@@ -8,6 +8,20 @@ export default props => {
   const [todoList, setTodoList] = useState(null);
   const [shoppingList, setShoppingList] = useState(null);
 
+  const getList = list => {
+    axios({
+      method: "get",
+      url: "http://localhost:5000/todolist/" + list.todolist_id + "/all"
+    })
+      .then(({ data: listData }) => {
+        if (list.list_type === "Shopping List") setShoppingList(listData);
+        else setTodoList(listData);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <button onClick={createList}>Add</button>
