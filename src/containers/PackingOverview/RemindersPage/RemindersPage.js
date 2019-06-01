@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NoReminders from "./NoReminders/NoReminders";
+import AddListButton from "./AddListButton/AddListButton";
 
-export default props => {
-  const { lists, updateLists, trip_id } = props;
+const RemindersPage = props => {
+  const { lists, updateLists, trip_id, selectedList, handleSelectList } = props;
 
   const [todoList, setTodoList] = useState(null);
   const [shoppingList, setShoppingList] = useState(null);
@@ -50,8 +51,13 @@ export default props => {
 
   return (
     <>
-      <button onClick={createList}>Add</button>
+      <AddListButton
+        createList={createList}
+        handleSelectList={handleSelectList}
+      />
       {lists.length ? <h4>Here's your todos:</h4> : <NoReminders />}
     </>
   );
 };
+
+export default RemindersPage;
