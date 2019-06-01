@@ -15,6 +15,25 @@ export default props => {
     }
   }, [lists]);
 
+  const createList = () => {
+    axios({
+      method: "post",
+      url: "http://localhost:5000/todolist/",
+      data: {
+        name: "",
+        trip_id,
+        list_type: "Todos"
+      }
+    })
+      .then(res => {
+        console.log("list created");
+        updateLists();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const getList = list => {
     axios({
       method: "get",
