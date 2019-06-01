@@ -14,6 +14,7 @@ export default (class PackingOverview extends Component {
       page: "packing",
       bags: null,
       lists: null,
+      selectedList: null,
       loading: true
     };
   }
@@ -58,6 +59,10 @@ export default (class PackingOverview extends Component {
     }
   };
 
+  handleSelectList = e => {
+    this.setState({ selectedList: e.target.value });
+  };
+
   updateLists = () => {
     const { trip_id } = this.props.match.params;
 
@@ -100,7 +105,7 @@ export default (class PackingOverview extends Component {
   };
 
   render() {
-    const { loading, page, bags, lists, tripInfo } = this.state;
+    const { loading, page, bags, lists, tripInfo, selectedList } = this.state;
     return (
       <>
         {this.tabs(page)}
@@ -113,6 +118,8 @@ export default (class PackingOverview extends Component {
             lists={lists}
             updateLists={this.updateLists}
             trip_id={tripInfo.id}
+            selectedList={selectedList}
+            handleSelectList={this.handleSelectList}
           />
         )}
       </>
