@@ -23,7 +23,7 @@ const RemindersPage = props => {
       data: {
         name: "",
         trip_id,
-        list_type: "Todos"
+        list_type: selectedList
       }
     })
       .then(res => {
