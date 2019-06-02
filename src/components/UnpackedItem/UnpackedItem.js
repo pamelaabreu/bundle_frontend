@@ -24,7 +24,7 @@ export default props => {
     ? image
     : "https://www.jcrew.com/s7-img-facade/L4012_PA6511?fmt=jpeg";
   return (
-    <div className="m-2 border border-white rounded">
+    <div className="col m-2 border border-white rounded">
       <button
         className={"item--unpacked p-0 rounded" + toDelete}
         onClick={handleClick("item", index)}
