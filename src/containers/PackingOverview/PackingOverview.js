@@ -77,6 +77,11 @@ export default (class PackingOverview extends Component {
     });
   };
 
+  moveToTrip = () => {
+    const { trip_id } = this.props.match.params;
+    this.props.history.push("/trip/" + trip_id);
+  };
+
   tabs = page => {
     return (
       <div className="container">
@@ -94,7 +99,7 @@ export default (class PackingOverview extends Component {
             </button>
           </div>
           <div className="col-2">
-            <div className="row">
+            <div className="row" onClick={this.moveToTrip}>
               <span className="col-12 text-center">Trip</span>
               <i className="col-12 fas fa-long-arrow-alt-left text-center pack--arrow-transform" />
             </div>
