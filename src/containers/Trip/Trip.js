@@ -77,7 +77,7 @@ class Trip extends Component {
         <div className="row justify-content-between">
           <div className="col-lg-4">
             <div>
-              <h5 onClick={this.moveToPack}>Trip Details</h5>
+              <h5>Trip Details</h5>
               <p style={{ fontSize: "3.5rem" }}>
                 {city}, {country}
               </p>
