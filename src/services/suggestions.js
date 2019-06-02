@@ -1,5 +1,5 @@
 import moment from "moment";
-import items from "./items.json";
+import items_original from "./items.json";
 // const moment = require('moment');
 // const items = require('./items.json');
 
@@ -22,6 +22,7 @@ const getSuggestions = (duration = 4, condition) => {
 };
 
 const buildSuggestions = actualTripDuration => {
+  let items = JSON.parse(JSON.stringify(items_original));
   const suggested = {};
   // loop through general items
   for (let item of items.general) {
