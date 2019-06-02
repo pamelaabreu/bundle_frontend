@@ -99,10 +99,10 @@ export default (class PackingOverview extends Component {
             </button>
           </div>
           <div className="col-2">
-            <a className="row" onClick={this.moveToTrip}>
+            <button className="row" onClick={this.moveToTrip}>
               <span className="col-12 text-center">Trip</span>
               <i className="col-12 fas fa-long-arrow-alt-left text-center pack--arrow-transform" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
