@@ -65,6 +65,11 @@ class Trip extends Component {
       trip: trip.data
     });
   }
+
+  moveToPack = () => {
+    const { trip_id } = this.props.match.params;
+    this.props.history.push("/pack/" + trip_id);
+  };
   render() {
     const { city, country, departure_date, return_date } = this.state.trip;
     return (
@@ -72,7 +77,7 @@ class Trip extends Component {
         <div className="row justify-content-between">
           <div className="col-lg-4">
             <div>
-              <h5>Trip Details</h5>
+              <h5 onClick={this.moveToPack}>Trip Details</h5>
               <p style={{ fontSize: "3.5rem" }}>
                 {city}, {country}
               </p>
