@@ -1,4 +1,3 @@
-import moment from "moment";
 import items_original from "./items.json";
 // const moment = require('moment');
 // const items = require('./items.json');
