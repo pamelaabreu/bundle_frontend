@@ -3,10 +3,17 @@ import items_original from "./items.json";
 // const moment = require('moment');
 // const items = require('./items.json');
 
-// Anything over 25 days will return 'a month'
-const getDuration = (departureDate, returnDate) =>
-  moment(returnDate).from(moment(departureDate), true);
-// example: getDuration("2019-05-28", "2019-06-22") // returns 25 days
+// returns a number between two date strings
+// format YYYY-MM-DD
+const getDuration = (departureDate, returnDate) => {
+  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+  const firstDate = new Date(departureDate);
+  const secondDate = new Date(returnDate);
+  return Math.round(
+    Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay)
+  );
+};
+// example: getDuration("2019-05-28", "2019-06-22") // returns 25
 
 const getSuggestions = (duration = 4, condition) => {
   // this function calls buildSuggestions based on the duration
