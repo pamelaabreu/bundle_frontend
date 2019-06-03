@@ -89,9 +89,7 @@ export default (class PackPage extends Component {
 
   handleAddToDelete = (name, index) => {
     this.closeLastQuantity();
-    const { toDelete, displayBag } = this.state;
-    const currentBag = this.state[displayBag];
-    const newState = addToDelete(name, index, toDelete, displayBag, currentBag);
+    const newState = addToDelete(name, index, this.state);
     this.setState(newState);
   };
 

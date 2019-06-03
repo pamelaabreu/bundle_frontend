@@ -36,7 +36,9 @@ export const mountPacking = async (bagTypes, bags) => {
   }
 };
 
-export const addToDelete = (name, index, toDelete, displayBag, currentBag) => {
+export const addToDelete = (name, index, state) => {
+  const { toDelete, displayBag } = state;
+  const currentBag = state[displayBag];
   const item_id = currentBag[index].item_id;
   let newToDelete = toDelete;
   if (name === "item" || name === "unpack") {
