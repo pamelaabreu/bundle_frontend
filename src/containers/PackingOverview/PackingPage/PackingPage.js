@@ -94,21 +94,12 @@ export default (class PackPage extends Component {
   };
 
   handleExecuteDelete = async () => {
-    const { toDelete, displayBag, totalItems, totalPacked } = this.state;
     // if toDelete is empty, set deleteMode to false, and exit method
-    if (toDelete.length === 0) {
+    if (this.state.toDelete.length === 0) {
       this.setState({ deleteMode: false });
       return;
     }
-    // grab the current bag we are deleting from, and create a queue array
-    let currentBag = this.state[displayBag];
-    const newState = await executeDelete(
-      currentBag,
-      toDelete,
-      displayBag,
-      totalItems,
-      totalPacked
-    );
+    const newState = await executeDelete(this.state);
     this.setState(newState);
   };
 

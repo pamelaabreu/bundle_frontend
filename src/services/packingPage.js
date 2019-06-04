@@ -56,13 +56,10 @@ export const addToDelete = (name, index, state) => {
   return { toDelete: newToDelete, [displayBag]: currentBag };
 };
 
-export const executeDelete = async (
-  currentBag,
-  toDelete,
-  displayBag,
-  totalItems,
-  totalPacked
-) => {
+export const executeDelete = async state => {
+  const { toDelete, displayBag, totalItems, totalPacked } = state;
+  // grab the current bag we are deleting from, and create a queue array
+  let currentBag = state[displayBag];
   const deleteQueue = [];
   // fill queue array with api calls of what is going to be deleted
   for (let item_id of toDelete) {
@@ -76,7 +73,6 @@ export const executeDelete = async (
   try {
     // if successful
     const res = await Promise.all(deleteQueue);
-    console.log("delete resulte: ", res);
     let removedFromPacked = 0;
     // loop through the current bag in the front end and remove each item
     for (let item_id of toDelete) {
