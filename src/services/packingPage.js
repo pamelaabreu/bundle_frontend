@@ -112,7 +112,9 @@ export const executeDelete = async state => {
   }
 };
 
-export const unpack = (index, displayBag, totalPacked, items) => {
+export const unpack = (index, state) => {
+  const { displayBag, totalPacked } = state;
+  const items = state[displayBag];
   items[index].selected = !items[index].selected;
   items[index].packed = false;
   axios({
@@ -123,7 +125,7 @@ export const unpack = (index, displayBag, totalPacked, items) => {
     }
   })
     .then(({ data }) => {
-      console.log(data);
+      // console.log(data);
     })
     .catch(err => {
       console.log("ERROR PACKING ITEM IN THE BACK END!");

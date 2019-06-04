@@ -104,9 +104,7 @@ export default (class PackPage extends Component {
   };
 
   handleUnpack = index => {
-    const { displayBag, totalPacked } = this.state;
-    const items = this.state[displayBag];
-    const newState = unpack(index, displayBag, totalPacked, items);
+    const newState = unpack(index, this.state);
     this.setState(newState);
     return;
   };
