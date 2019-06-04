@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import AddItem from "../../../components/AddItem/AddItem";
 import BagSelector from "../../../components/BagSelectorCard/BagSelectorCard";
 import Bag from "../../../components/Bag/Bag";
 import DeleteConfirm from "../../../components/DeleteConfirm/DeleteConfirm";
@@ -221,7 +220,6 @@ export default (class PackPage extends Component {
               </div>
               <div className="col-2 p-0">
                 <div>
-                  {/* <AddItem bagName={this.state.bagName} /> */}
                   <AddItemButton
                     itemInput={itemInput}
                     handleOnChange={this.handleOnChange}
