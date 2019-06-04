@@ -10,6 +10,7 @@ import AddItemButton from "../RemindersPage/AddItemButton/AddItemButton";
 import {
   addToDelete,
   closeLastQuantity,
+  createItem,
   executeDelete,
   markImportant,
   mountPacking,
@@ -156,42 +157,9 @@ export default (class PackPage extends Component {
   };
 
   handleCreateItem = async () => {
-    const { itemInput, displayBag } = this.state;
-    const currentBag = this.state[displayBag];
-    const bag_id = this.state[displayBag][0].bag_id;
-    if (itemInput.trim() === "") return;
-    let item = itemInput.trim();
-    try {
-      const {
-        data: { id }
-      } = await axios({
-        method: "post",
-        url: BASEURL + "/items/",
-        data: {
-          name: item,
-          packed: false,
-          quantity: 1,
-          bag_id,
-          category_id: 9
-        }
-      });
-      currentBag.push({
-        bag_id: bag_id,
-        category_id: 3,
-        flag_id: null,
-        id: 1031,
-        image: null,
-        important: false,
-        item_id: id,
-        name: item,
-        packed: false,
-        quantity: 1,
-        type_id: 9
-      });
-      this.setState({ itemInput: "", [displayBag]: currentBag });
-    } catch (err) {
-      console.log(err);
-    }
+    const newState = await createItem(this.state);
+    if (newState) this.setState(newState);
+    return;
   };
 
   onKeyPress = (name, index) => e => {

@@ -234,3 +234,43 @@ export const quantity = (index, e, keyPress, state) => {
     lastInputIndex: index
   };
 };
+
+export const createItem = async state => {
+  const { itemInput, displayBag } = state;
+  const currentBag = state[displayBag];
+  if (currentBag.length === 0 || currentBag.length === undefined) return null;
+  const bag_id = state[displayBag][0].bag_id;
+  if (itemInput.trim() === "") return null;
+  let item = itemInput.trim();
+  try {
+    const {
+      data: { id }
+    } = await axios({
+      method: "post",
+      url: BASEURL + "/items/",
+      data: {
+        name: item,
+        packed: false,
+        quantity: 1,
+        bag_id,
+        category_id: 9
+      }
+    });
+    currentBag.push({
+      bag_id: bag_id,
+      category_id: 3,
+      flag_id: null,
+      id: 1031,
+      image: null,
+      important: false,
+      item_id: id,
+      name: item,
+      packed: false,
+      quantity: 1,
+      type_id: 9
+    });
+    return { itemInput: "", [displayBag]: currentBag };
+  } catch (err) {
+    console.log("Error creating item");
+  }
+};
