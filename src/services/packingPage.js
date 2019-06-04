@@ -275,3 +275,16 @@ export const createItem = async state => {
     console.log("Error creating item");
   }
 };
+
+export const inputChange = (name, index, e, state) => {
+  if (name === "quantity") {
+    const { displayBag } = state;
+    const items = state[displayBag];
+    const val = e.target.value < 1 ? "" : e.target.value;
+    items[index].quantity = val;
+    return {
+      [displayBag]: items
+    };
+  }
+  return null;
+};

@@ -10,6 +10,7 @@ import {
   closeLastQuantity,
   createItem,
   executeDelete,
+  inputChange,
   markImportant,
   mountPacking,
   quantity,
@@ -137,16 +138,9 @@ export default (class PackPage extends Component {
     return;
   };
 
-  handleChange = (name, index) => e => {
-    if (name === "quantity") {
-      const { displayBag } = this.state;
-      const items = this.state[displayBag];
-      const val = e.target.value < 1 ? "" : e.target.value;
-      items[index].quantity = val;
-      this.setState({
-        [displayBag]: items
-      });
-    }
+  handleInputChange = (name, index) => e => {
+    const newState = inputChange(name, index, e, this.state);
+    if (newState) this.setState(newState);
     return;
   };
 
@@ -221,7 +215,7 @@ export default (class PackPage extends Component {
                 <Bag
                   items={bagContents}
                   handleOnClick={this.handleOnClick}
-                  handleChange={this.handleChange}
+                  handleChange={this.handleInputChange}
                   onKeyPress={this.onKeyPress}
                 />
               </div>
