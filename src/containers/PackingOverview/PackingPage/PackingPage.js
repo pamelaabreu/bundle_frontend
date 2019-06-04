@@ -9,6 +9,7 @@ import ProgressBar from "../../../components/ProgressBar/ProgressBar";
 import AddItemButton from "../RemindersPage/AddItemButton/AddItemButton";
 import {
   addToDelete,
+  closeLastQuantity,
   executeDelete,
   markImportant,
   mountPacking,
@@ -54,7 +55,7 @@ export default (class PackPage extends Component {
       this.handleAddToDelete(name, index);
       return;
     }
-    if (name !== "quantity") this.closeLastQuantity();
+    if (name !== "quantity") this.handleCloseLastQuantity();
     switch (name) {
       case "packing":
         this.setState({ page: name });
@@ -89,7 +90,7 @@ export default (class PackPage extends Component {
   };
 
   handleAddToDelete = (name, index) => {
-    this.closeLastQuantity();
+    this.handleCloseLastQuantity();
     const newState = addToDelete(name, index, this.state);
     this.setState(newState);
   };
@@ -123,7 +124,7 @@ export default (class PackPage extends Component {
   };
 
   handleQuantity = (index, e, keyPress) => {
-    this.closeLastQuantity();
+    this.handleCloseLastQuantity();
     const { displayBag } = this.state;
     const items = this.state[displayBag];
     // const { items } = this.state;
@@ -154,22 +155,9 @@ export default (class PackPage extends Component {
     });
   };
 
-  closeLastQuantity = () => {
-    const { displayBag, lastInputIndex } = this.state;
-    const items = this.state[displayBag];
-    if (!items || items.length === 0) return;
-    if (lastInputIndex !== null) {
-      const val =
-        items[lastInputIndex].quantity < 1 ||
-        items[lastInputIndex].quantity === ""
-          ? 1
-          : items[lastInputIndex].quantity;
-      items[lastInputIndex].quantity = val;
-      items[lastInputIndex].modifyQuant = false;
-      this.setState({
-        [displayBag]: items
-      });
-    }
+  handleCloseLastQuantity = () => {
+    const newState = closeLastQuantity(this.state);
+    if (newState) this.setState(newState);
     return;
   };
 

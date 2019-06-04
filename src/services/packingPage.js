@@ -185,3 +185,21 @@ export const select = (index, state) => {
     totalPacked: newTotalPacked
   };
 };
+
+export const closeLastQuantity = state => {
+  const { displayBag, lastInputIndex } = state;
+  const items = state[displayBag];
+  if (!items || items.length === 0) return null;
+  if (lastInputIndex !== null) {
+    const val =
+      items[lastInputIndex].quantity < 1 ||
+      items[lastInputIndex].quantity === ""
+        ? 1
+        : items[lastInputIndex].quantity;
+    items[lastInputIndex].quantity = val;
+    items[lastInputIndex].modifyQuant = false;
+    return {
+      [displayBag]: items
+    };
+  }
+};
