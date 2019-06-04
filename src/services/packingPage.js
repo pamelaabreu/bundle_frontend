@@ -137,7 +137,10 @@ export const unpack = (index, state) => {
   };
 };
 
-export const markImportant = (index, displayBag, items) => {
+export const markImportant = (index, state) => {
+  const { displayBag } = state;
+  const items = state[displayBag];
+  if (!items || items.length === 0) return null;
   items[index].important = !items[index].important;
   axios({
     method: "put",
@@ -147,7 +150,7 @@ export const markImportant = (index, displayBag, items) => {
     }
   })
     .then(({ data }) => {
-      console.log(data);
+      // console.log(data);
     })
     .catch(err => {
       console.log("ERROR PACKING ITEM IN THE BACK END!");

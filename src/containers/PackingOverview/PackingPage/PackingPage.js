@@ -110,11 +110,9 @@ export default (class PackPage extends Component {
   };
 
   handleImportant = (index, e) => {
-    const { displayBag } = this.state;
-    const items = this.state[displayBag];
-    if (!items || items.length === 0) return;
-    const newState = markImportant(index, displayBag, items);
-    this.setState(newState);
+    const newState = markImportant(index, this.state);
+    if (newState) this.setState(newState);
+    return;
   };
 
   handleSelect = (index, e) => {
