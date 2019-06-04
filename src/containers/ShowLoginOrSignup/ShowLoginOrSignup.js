@@ -5,7 +5,7 @@ import Signup from "../../containers/Signup/Signup";
 import Login from "../../containers/Login/Login";
 
 const ShowLoginOrSignup = props => {
-  const [showLoginOrSignup, setLoginOrSignup] = useState(false);
+  const [showLoginOrSignup, setLoginOrSignup] = useState(true);
 
   return (
     <>
