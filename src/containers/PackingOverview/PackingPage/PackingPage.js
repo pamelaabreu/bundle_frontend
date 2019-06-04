@@ -12,6 +12,7 @@ import {
   executeDelete,
   markImportant,
   mountPacking,
+  select,
   unpack
 } from "../../../services/packingPage";
 import "./PackingPage.css";
@@ -116,29 +117,9 @@ export default (class PackPage extends Component {
   };
 
   handleSelect = (index, e) => {
-    const { displayBag, totalPacked } = this.state;
-    const items = this.state[displayBag];
-    if (!items || items.length === 0) return;
-    items[index].selected = !items[index].selected;
-    items[index].packed = true;
-    axios({
-      method: "put",
-      url: BASEURL + "/items/" + items[index].id,
-      data: {
-        packed: items[index].packed
-      }
-    })
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch(err => {
-        console.log("ERROR PACKING ITEM IN THE BACK END!");
-      });
-    const newTotalPacked = totalPacked + 1;
-    this.setState({
-      [displayBag]: items,
-      totalPacked: newTotalPacked
-    });
+    const newState = select(index, this.state);
+    if (newState) this.setState(newState);
+    return;
   };
 
   handleQuantity = (index, e, keyPress) => {

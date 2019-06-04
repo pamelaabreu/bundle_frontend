@@ -159,3 +159,29 @@ export const markImportant = (index, state) => {
     [displayBag]: items
   };
 };
+
+export const select = (index, state) => {
+  const { displayBag, totalPacked } = state;
+  const items = state[displayBag];
+  if (!items || items.length === 0) return null;
+  items[index].selected = !items[index].selected;
+  items[index].packed = true;
+  axios({
+    method: "put",
+    url: BASEURL + "/items/" + items[index].id,
+    data: {
+      packed: items[index].packed
+    }
+  })
+    .then(({ data }) => {
+      // console.log(data);
+    })
+    .catch(err => {
+      console.log("ERROR PACKING ITEM IN THE BACK END!");
+    });
+  const newTotalPacked = totalPacked + 1;
+  return {
+    [displayBag]: items,
+    totalPacked: newTotalPacked
+  };
+};
