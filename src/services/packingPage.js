@@ -203,3 +203,34 @@ export const closeLastQuantity = state => {
     };
   }
 };
+
+export const quantity = (index, e, keyPress, state) => {
+  const { displayBag } = state;
+  const items = state[displayBag];
+  // const { items } = this.state;
+  if (!items || items.length === 0) return null;
+  if (keyPress) {
+    const val = e.target.value < 1 ? 1 : e.target.value;
+    items[index].quantity = val;
+    items[index].modifyQuant = false;
+  } else {
+    items[index].modifyQuant = !items[index].modifyQuant;
+  }
+  axios({
+    method: "put",
+    url: BASEURL + "/items/" + items[index].id,
+    data: {
+      quantity: items[index].quantity
+    }
+  })
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log("ERROR PACKING ITEM IN THE BACK END!");
+    });
+  return {
+    [displayBag]: items,
+    lastInputIndex: index
+  };
+};
