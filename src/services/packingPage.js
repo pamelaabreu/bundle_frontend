@@ -73,6 +73,7 @@ export const executeDelete = async state => {
   try {
     // if successful
     const res = await Promise.all(deleteQueue);
+    console.log("Delete: ", res[0].statusText);
     let removedFromPacked = 0;
     // loop through the current bag in the front end and remove each item
     for (let item_id of toDelete) {

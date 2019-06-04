@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
-import BASEURL from "../../../services/backendUrlConnect";
 // import AddItem from "../../../components/AddItem/AddItem";
 import BagSelector from "../../../components/BagSelectorCard/BagSelectorCard";
 import Bag from "../../../components/Bag/Bag";
@@ -27,7 +25,6 @@ export default (class PackPage extends Component {
       tripInfo: null,
       categories: null,
       page: "packing",
-      bagName: "Personal",
       bags: null,
       bagTypes: { 1: "Personal", 2: "Carry-On", 3: "Checked" },
       currentBag: null,
