@@ -53,7 +53,8 @@ class Signup extends React.Component {
               "Trouble creating user. Please try again later!"
           })
       )
-      .then(closeMenu());
+      .then(closeMenu())
+      .catch(err => console.log("Error", err));
   };
 
   render() {
