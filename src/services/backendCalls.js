@@ -1,7 +1,6 @@
 import axios from "axios";
 import { randomTripNameGenerator, splitDestination } from "./suggestions";
-
-const BASE_URL = "http://localhost:5000";
+import BASE_URL from "./backendUrlConnect.js";
 
 const createTrip = (
   destination,
