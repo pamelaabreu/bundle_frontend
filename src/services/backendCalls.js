@@ -3,7 +3,12 @@ import { randomTripNameGenerator, splitDestination } from "./suggestions";
 
 const BASE_URL = "http://localhost:5000";
 
-const createTrip = (destination, departureDate, returnDate, user_id = null) => {
+const createTrip = (
+  destination,
+  departureDate,
+  returnDate,
+  user_uid = null
+) => {
   let temp = splitDestination(destination);
   let name = randomTripNameGenerator(temp.city);
 
@@ -16,7 +21,7 @@ const createTrip = (destination, departureDate, returnDate, user_id = null) => {
       country: temp.country,
       departure_date: departureDate,
       return_date: returnDate,
-      user_id
+      user_uid
     }
   });
 };
@@ -37,10 +42,10 @@ const buildBundle = (
   destination,
   departureDate,
   returnDate,
-  user_id = null
+  user_uid = null
 ) => {
   let trip_id = null;
-  return createTrip(destination, departureDate, returnDate, (user_id = null))
+  return createTrip(destination, departureDate, returnDate, user_uid)
     .then(({ data: { id } }) => {
       trip_id = id;
       const personal = createBag(id, 1);
