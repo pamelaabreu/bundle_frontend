@@ -36,8 +36,7 @@
   border-right: 1px solid #4996c9;
   border-top: 1px solid #4996c9;
   border-bottom: 1px solid #4996c9;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-radius: 1rem;
   color: var(--bundleBlue);
 }
 
@@ -59,8 +58,7 @@
   border-right: 1px solid #4996c9;
   border-top: 1px solid #4996c9;
   border-bottom: 1px solid #4996c9;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-radius: 1rem;
   color: var(--bundleBlue);
 }
 
@@ -201,19 +199,19 @@
   font-size: 1.5rem;
 }
 
-.pItem--pack-md {
+.pItem--unpack-md {
   font-size: 1.8rem;
 }
 
-.pItem--pack-lg {
+.pItem--unpack-lg {
   font-size: 2.1rem;
 }
 
-.pItem--pack-xlg {
+.pItem--unpack-xlg {
   font-size: 2.3rem;
 }
 
-.pItem--pack-xxlg {
+.pItem--unpack-xxlg {
   font-size: 2.6rem;
 }
 

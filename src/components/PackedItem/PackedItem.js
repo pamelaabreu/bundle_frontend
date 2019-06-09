@@ -61,7 +61,7 @@ export default props => {
           </div>
           <div className="col-12 pItem--buttons rounded">
             <div className="row px-2 no-gutters">
-              <span
+              {/* <span
                 className={
                   dynamicSize("button") + " col pItem--button-left align-center"
                 }
@@ -109,7 +109,7 @@ export default props => {
                     </button>
                   </div>
                 </div>
-              </span>
+              </span> */}
               <button
                 type="button"
                 className={
