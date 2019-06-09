@@ -1,6 +1,6 @@
 import React from "react";
 import UnpackedItem from "../UnpackedItem/UnpackedItem";
-import PackedItem from "../DeprecatedPackedItem/PackedItem";
+import PackedItem from "../PackedItem/PackedItem";
 
 export default props => {
   const { items, handleOnClick, handleChange, onKeyPress, deleteMode } = props;
@@ -12,16 +12,15 @@ export default props => {
       if (e.packed) {
         packedCount += 1;
         return (
-          <div className="col-6 col-sm-6 col-md-4 p-0" key={i}>
-            <PackedItem
-              {...e}
-              index={i}
-              deleteMode={deleteMode}
-              handleClick={handleOnClick}
-              handleChange={handleChange}
-              onKeyPress={onKeyPress}
-            />
-          </div>
+          <PackedItem
+            {...e}
+            index={i}
+            key={i}
+            deleteMode={deleteMode}
+            handleClick={handleOnClick}
+            handleChange={handleChange}
+            onKeyPress={onKeyPress}
+          />
         );
       } else return null;
     });
