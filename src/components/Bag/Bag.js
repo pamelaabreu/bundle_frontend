@@ -1,6 +1,6 @@
 import React from "react";
 import UnpackedItem from "../UnpackedItem/UnpackedItem";
-import PackedItem from "../PackedItem/PackedItem";
+import PackedItem from "../DeprecatedPackedItem/PackedItem";
 
 export default props => {
   const { items, handleOnClick, handleChange, onKeyPress, deleteMode } = props;
