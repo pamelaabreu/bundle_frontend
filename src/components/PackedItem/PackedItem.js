@@ -27,15 +27,15 @@ export default props => {
     : "https://www.jcrew.com/s7-img-facade/L4012_PA6511?fmt=jpeg";
 
   const rightButton = deleteMode
-    ? "uItem--button-rightDelete"
-    : "uItem--button-right";
+    ? "pItem--button-rightDelete"
+    : "pItem--button-right";
 
   const dynamicSize = name => {
-    if (width < 500) return `uItem--${name}`;
-    if (width >= 500 && width < 990) return `uItem--${name}-md`;
-    if (width >= 990 && width < 1200) return `uItem--${name}-lg`;
-    if (width >= 1200 && width < 1300) return `uItem--${name}-xlg`;
-    if (width > 1300) return `uItem--${name}-xxlg`;
+    if (width < 500) return `pItem--${name}`;
+    if (width >= 500 && width < 990) return `pItem--${name}-md`;
+    if (width >= 990 && width < 1200) return `pItem--${name}-lg`;
+    if (width >= 1200 && width < 1300) return `pItem--${name}-xlg`;
+    if (width > 1300) return `pItem--${name}-xxlg`;
   };
 
   return (
@@ -47,23 +47,23 @@ export default props => {
         <div
           className={
             dynamicSize("unpacked") +
-            "  uItem my-2 border border-white uItem--content-main row no-gutters"
+            "  pItem my-2 border border-white pItem--content-main row no-gutters"
           }
           style={{ backgroundImage: `url(${img})` }}
         >
           <div
             className={
               dynamicSize("header") +
-              " col-12 uItem--head text-center p-0 rounded"
+              " col-12 pItem--head text-center p-0 rounded"
             }
           >
-            <span className="uItem--title--font c-denimBlue">{name}</span>
+            <span className="pItem--title--font c-denimBlue">{name}</span>
           </div>
-          <div className="col-12 uItem--buttons rounded">
+          <div className="col-12 pItem--buttons rounded">
             <div className="row px-2 no-gutters">
               <span
                 className={
-                  dynamicSize("button") + " col uItem--button-left align-center"
+                  dynamicSize("button") + " col pItem--button-left align-center"
                 }
               >
                 <div
@@ -77,7 +77,7 @@ export default props => {
                     }
                   >
                     <button
-                      className="uItem--quantity-button bg-bundleBlue"
+                      className="pItem--quantity-button bg-bundleBlue"
                       type="button"
                       aria-label="reduce quantity"
                       onClick={handleClick("decreaseQuantity", index)}
@@ -90,7 +90,7 @@ export default props => {
                       dynamicSize("quantity") + " col text-center align-bottom"
                     }
                   >
-                    <span className=" uItem--quantity-weight c-white align-bottom">
+                    <span className=" pItem--quantity-weight c-white align-bottom">
                       {quantity}
                     </span>
                   </div>
@@ -100,7 +100,7 @@ export default props => {
                     }
                   >
                     <button
-                      className="uItem--quantity-button bg-bundleBlue"
+                      className="pItem--quantity-button bg-bundleBlue"
                       type="button"
                       aria-label="incrase quantity"
                       onClick={handleClick("increaseQuantity", index)}
@@ -119,10 +119,10 @@ export default props => {
                   " " +
                   toDelete
                 }
-                aria-label={`select ${name}`}
-                onClick={handleClick("select", index)}
+                aria-label={`unpack ${name}`}
+                onClick={handleClick("unpack", index)}
               >
-                <span className={dynamicSize("pack")}>Pack</span>
+                <span className={dynamicSize("unpack")}>Unpack</span>
               </button>
             </div>
           </div>
