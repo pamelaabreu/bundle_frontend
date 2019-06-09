@@ -61,55 +61,6 @@ export default props => {
           </div>
           <div className="col-12 pItem--buttons rounded">
             <div className="row px-2 no-gutters">
-              {/* <span
-                className={
-                  dynamicSize("button") + " col pItem--button-left align-center"
-                }
-              >
-                <div
-                  className={
-                    " row justify-content-center no-gutters align-center"
-                  }
-                >
-                  <div
-                    className={
-                      dynamicSize("btnrow") + " col text-center align-center"
-                    }
-                  >
-                    <button
-                      className="pItem--quantity-button bg-bundleBlue"
-                      type="button"
-                      aria-label="reduce quantity"
-                      onClick={handleClick("decreaseQuantity", index)}
-                    >
-                      <i className="fas fa-minus c-white" />
-                    </button>
-                  </div>
-                  <div
-                    className={
-                      dynamicSize("quantity") + " col text-center align-bottom"
-                    }
-                  >
-                    <span className=" pItem--quantity-weight c-white align-bottom">
-                      {quantity}
-                    </span>
-                  </div>
-                  <div
-                    className={
-                      dynamicSize("btnrow") + " col text-center align-center"
-                    }
-                  >
-                    <button
-                      className="pItem--quantity-button bg-bundleBlue"
-                      type="button"
-                      aria-label="incrase quantity"
-                      onClick={handleClick("increaseQuantity", index)}
-                    >
-                      <i className="fas fa-plus c-white" />
-                    </button>
-                  </div>
-                </div>
-              </span> */}
               <button
                 type="button"
                 className={
