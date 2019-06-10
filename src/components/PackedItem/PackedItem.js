@@ -39,7 +39,7 @@ export default props => {
   };
 
   return (
-    <div className="col-6 col-sm-6 col-md-4 col-lg-4 my-2 p-2">
+    <div className="col-6 col-sm-6 col-md-4 col-lg-4 my-2 p-2 ">
       <div
         className="row justify-content-center"
         onClick={handleClick("item", index)}
@@ -47,17 +47,16 @@ export default props => {
         <div
           className={
             dynamicSize("unpacked") +
-            "  pItem my-2 border border-white pItem--content-main row no-gutters"
+            "  pItem my-2 pItem--content-main row no-gutters b-radius9"
           }
           style={{ backgroundImage: `url(${img})` }}
         >
           <div
             className={
-              dynamicSize("header") +
-              " col-12 pItem--head text-center p-0 rounded"
+              dynamicSize("header") + " col-12 pItem--head text-center p-0 "
             }
           >
-            <span className="pItem--title--font c-denimBlue">{name}</span>
+            <span className="pItem--title--font c-white">{name}</span>
           </div>
           <div className="col-12 pItem--buttons rounded">
             <div className="row px-2 no-gutters">
