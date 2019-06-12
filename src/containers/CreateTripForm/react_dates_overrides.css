@@ -22,6 +22,12 @@
   background: var(--bundleBlue); /* background */
   color: var(--huate); /* text */
   border: 1px solid var(--huate); /* default styles include a border */
+  transition: background 0.2s ease;
+}
+
+.CalendarDay__selected_span:hover {
+  background: var(--bundleBlue70);
+  border: var(--bundleBlue70);
 }
 
 /* Will edit selected date or the endpoints of a range of dates */
@@ -29,6 +35,7 @@
   background: var(--denimBlue);
   border: var(--huate);
   color: var(--huate);
+  transition: background 0.2s ease;
 }
 
 /* Will edit when hovered over. _span style also has this property */
