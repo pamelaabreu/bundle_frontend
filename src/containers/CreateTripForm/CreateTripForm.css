@@ -5,3 +5,38 @@
 .createTripform-button:hover {
   background: var(--denimBlue);
 }
+
+.createTripform-input {
+  font-size: 1.9rem;
+  outline-color: var(--bundleBlue);
+  color: var(--smokeblack);
+}
+
+.createTripform-input::placeholder {
+  color: var(--smokeblack);
+  opacity: 1; /* Firefox */
+}
+
+.createTripform-input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--smokeblack);
+}
+
+.createTripform-input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--smokeblack);
+}
+
+.createTripform-input:-webkit-autofill,
+.createTripform-input:-webkit-autofill:hover,
+.createTripform-input:-webkit-autofill:focus
+  .createTripform-input:-webkit-autofill,
+.createTripform-input:-webkit-autofill:hover
+  .createTripform-input:-webkit-autofill:focus,
+.createTripform-input:-webkit-autofill,
+.createTripform-input:-webkit-autofill:hover,
+.createTripform-input:-webkit-autofill:focus {
+  -webkit-box-shadow: transparent;
+  -webkit-text-fill-color: var(--smokeblack);
+  transition: background-color 5000s ease-in-out 0s;
+}
