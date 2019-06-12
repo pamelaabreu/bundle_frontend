@@ -1,27 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import "./CreateTripForm.css";
+import { DateRangePicker } from "react-dates";
 
 export default props => {
-  let today = moment().format("YYYY-MM-DD");
-  let tomorrow = moment()
-    .add(1, "day")
-    .format("YYYY-MM-DD");
+  const { startDateHandler, endDateHandler } = props;
+
+  const [focusedInput, setFocusInput] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  useEffect(() => {
+    startDateHandler(moment(startDate).format("YYYY-MM-DD"));
+  }, [startDate, startDateHandler]);
+
+  useEffect(() => {
+    endDateHandler(moment(endDate).format("YYYY-MM-DD"));
+  }, [endDate, endDateHandler]);
 
   const disabledButtonDisplay = props.disabled
-    ? "bg-white c-smokeGrey border-0 p-3 h4 baloo b-radius9"
-    : "bundleBlueButton border-0 p-3 createTripform-button h4 baloo";
+    ? "bg-white c-smokeGrey border-0 p-3 h2 baloo b-radius9"
+    : "bundleBlueButton border-0 p-3 createTripform-button h2 baloo";
+
+  const onDateChange = (startDate, endDate) => {
+    setEndDate(endDate);
+    setStartDate(startDate);
+  };
 
   return (
     <>
       <div className="create-trip-form">
         <form className="" onSubmit={props.createTripHandler}>
           <div className="form-group">
-            <label htmlFor="destination" className="c-bundleBlue h4">
+            <label htmlFor="destination" className="c-bundleBlue h2">
               Enter your destination:
             </label>
             <input
-              className="form-control c-denimBlue bundleBlue-border-bottom-3 h4"
+              className="createTripform-input c-smokeBlack mali400 border-0 p-3 w-100"
               type="text"
               name="destination"
               placeholder="City, Country"
@@ -32,37 +47,23 @@ export default props => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="destination" className="c-bundleBlue h4">
-              Enter departure date:
-            </label>
-            <input
-              className="form-control c-denimBlue bundleBlue-border-bottom-3 h4"
-              type="date"
-              id="departure"
-              name="departure"
-              min={today}
-              required
-              aria-label="Departure Date"
-              pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-              onChange={props.departureDateHandler}
-              value={props.departureDate}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="destination" className="c-bundleBlue h4">
-              Enter return date:
-            </label>
-            <input
-              className="form-control c-denimBlue bundleBlue-border-bottom-3 h4"
-              type="date"
-              id="return"
-              name="return"
-              min={tomorrow}
-              aria-label="Return Date"
-              required
-              pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-              onChange={props.returnDateHandler}
-              value={props.returnDate}
+            <DateRangePicker
+              noBorder={true}
+              block={true}
+              numberOfMonths={1}
+              daySize={26}
+              screenReaderInputMessage={"Enter your depature and return date."}
+              showDefaultInputIcon={true}
+              hideKeyboardShortcutsPanel={true}
+              startDate={startDate}
+              startDateId="startDate"
+              endDateId="endDate"
+              endDate={endDate}
+              onDatesChange={({ startDate, endDate }) =>
+                onDateChange(startDate, endDate)
+              }
+              focusedInput={focusedInput}
+              onFocusChange={focusedInput => setFocusInput(focusedInput)}
             />
           </div>
           <div className="d-flex justify-content-center p-2">
