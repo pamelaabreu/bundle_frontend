@@ -20,6 +20,7 @@
   font-size: 1.9rem;
   outline-color: var(--bundleBlue);
   color: var(--smokeblack);
+  border-radius: 0;
 }
 
 .createTripform-input::placeholder {
