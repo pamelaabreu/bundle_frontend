@@ -24,33 +24,6 @@ const PublicHome = props => {
           </div>
         </div>
       </div>
-
-      <div className="container my-5">
-        <div className="row">
-          <div className="col-sm mr-2">
-            <div className="publicHomeWhatPhotoBox" />
-          </div>
-          <div className="col-sm">
-            <h2 className="mali700 h1 c-bundleBlue">What's Bundle?</h2>
-            <p className="mali400 h5 c-smokeGrey">
-              We provide a trip-management hub for inexperienced travelers to
-              keep track of all their necessities. They’ll have a smoother and
-              more enjoyable experience preparing for it because they can
-              address all their travel considerations from one place. Bundle
-              creates suggested packing checklists and help complete them with
-              in-app planning until day of departure.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="jumbotron h-50 mb-0 bundleHomeGetPackingBox">
-        <div className="container">
-          <h1 className="display-4 c-white baloo text-center">
-            What are you waiting for? Get Packing!
-          </h1>
-        </div>
-      </div>
     </>
   );
 };
