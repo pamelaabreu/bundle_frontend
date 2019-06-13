@@ -1,9 +1,19 @@
+.createTripform-button-disabled {
+  cursor: not-allowed;
+}
+
 .createTripform-button {
   transition: background 0.2s ease;
 }
 
 .createTripform-button:hover {
-  background: var(--denimBlue);
+  background: var(--bundleBlue70);
+}
+
+.createTrip-icon {
+  font-size: 1.5rem;
+  color: var(--smokeblack);
+  padding-left: 1.5rem;
 }
 
 .createTripform-input {
