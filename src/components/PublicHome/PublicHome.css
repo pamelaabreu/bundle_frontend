@@ -5,3 +5,11 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.createTripForm-mb {
+  margin-bottom: 20rem;
+}
+
+.publicHome-width {
+  width: 120rem;
+}
