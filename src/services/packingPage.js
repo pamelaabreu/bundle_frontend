@@ -464,7 +464,6 @@ export const packAll = state => {
       });
     }
     temp[key] = copyBag;
-    temp.totalPacked = newTotalPacked;
   }
   if (totalItems === newTotalPacked && newTotalPacked > totalPacked) {
     Toast(
@@ -473,5 +472,6 @@ export const packAll = state => {
       `You're all packed!`
     );
   }
+  temp.totalPacked = newTotalPacked;
   return temp;
 };
