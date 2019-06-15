@@ -112,7 +112,7 @@ export default props => {
             </div>
           </button>
           <div className={"collapse " + packedCollapse} id="packed">
-            <div className="row bag--packed-container px-3">{packed}</div>
+            <div className="row bag--packed-container px-3 ">{packed}</div>
           </div>
         </div>
         <div className="mt-2">
@@ -139,7 +139,9 @@ export default props => {
             </div>
           </button>
           <div className={"collapse " + unpackedCollapse} id="unpacked">
-            <div className="row bag--unpacked-container px-3">{unPacked}</div>
+            <div className="row bag--unpacked-container px-3 pb-5 ">
+              {unPacked}
+            </div>
           </div>
         </div>
       </div>
