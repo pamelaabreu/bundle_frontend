@@ -441,3 +441,25 @@ export const getTripImg = async (id, name, city = "city") => {
     return url;
   }
 };
+
+export const packAll = state => {
+  const { bags, bagTypes } = state;
+  const temp = {};
+  for (let bag of bags) {
+    const { trip_id, bag_id, type_id } = bag;
+    const key = bagTypes[type_id][0] + bagTypes[type_id][1] + trip_id + bag_id;
+    const copyBag = state[key];
+    for (let item of copyBag) {
+      item.packed = true;
+      axios({
+        method: "put",
+        url: BASEURL + "/items/" + item.id,
+        data: {
+          packed: true
+        }
+      });
+    }
+    temp[key] = copyBag;
+  }
+  return temp;
+};
