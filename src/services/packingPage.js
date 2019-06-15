@@ -443,14 +443,18 @@ export const getTripImg = async (id, name, city = "city") => {
 };
 
 export const packAll = state => {
-  const { bags, bagTypes } = state;
+  const { bags, bagTypes, totalPacked, totalItems } = state;
   const temp = {};
+  let newTotalPacked = totalPacked;
+
   for (let bag of bags) {
     const { trip_id, bag_id, type_id } = bag;
     const key = bagTypes[type_id][0] + bagTypes[type_id][1] + trip_id + bag_id;
     const copyBag = state[key];
     for (let item of copyBag) {
+      if (item.packed) continue;
       item.packed = true;
+      newTotalPacked += 1;
       axios({
         method: "put",
         url: BASEURL + "/items/" + item.id,
@@ -460,6 +464,14 @@ export const packAll = state => {
       });
     }
     temp[key] = copyBag;
+    temp.totalPacked = newTotalPacked;
+  }
+  if (totalItems === newTotalPacked && newTotalPacked > totalPacked) {
+    Toast(
+      "https://cdn.lugless.com/wp-content/uploads/luggage-shipping.png" ||
+        DefaultImage,
+      `You're all packed!`
+    );
   }
   return temp;
 };
