@@ -1,6 +1,5 @@
 import React from "react";
 import Todo from "../Todo/Todo";
-import AddTodo from "../AddTodo/AddTodo";
 import "./TodoListView.css";
 
 const TodoListView = ({
@@ -13,121 +12,110 @@ const TodoListView = ({
   height
 }) => {
   const height75 = Math.floor(height * 0.75);
-
-  let completeItems = 0;
-  let incompleteItems = 0;
-
-  const getListCount = () => {
-    if (todoList.length > 0) {
-      todoList.forEach(todoItem => {
-        if (todoItem.complete === true) {
-          completeItems += 1;
-        } else if (todoItem.complete === false) {
-          incompleteItems += 1;
-        }
-      });
+  let incompleteCount = 0;
+  const incompleteTodos = todoList.map((e, i, a) => {
+    let t = a[a.length - 1 - i];
+    if (t.complete === false) {
+      incompleteCount += 1;
+      return (
+        <div className="todo" key={i}>
+          <Todo
+            task_name={t.task_name}
+            index={a.length - 1 - i}
+            value={t.id}
+            handleCompleteTodo={handleCompleteTodo}
+            handleDeleteTodo={handleDeleteTodo}
+            complete={t.complete}
+          />
+        </div>
+      );
     }
-  };
+    return null;
+  });
 
-  getListCount();
+  let completedCount = 0;
+  const completedTodos = todoList.map((e, i, a) => {
+    let t = a[a.length - 1 - i];
+    if (t.complete === true) {
+      completedCount += 1;
+      return (
+        <div className="todo b-radius9" key={i}>
+          <Todo
+            task_name={t.task_name}
+            index={a.length - 1 - i}
+            value={t.id}
+            handleDeleteTodo={handleDeleteTodo}
+            complete={t.complete}
+          />
+        </div>
+      );
+    }
+    return null;
+  });
 
   return (
     <>
       <div
-        className="todo-list-view"
-        style={{ height: height75 + "px", maxHeight: height75 + "px" }}
+        className="container mt-5 bg-babyBlue"
+        style={{
+          height: height + "px",
+          maxHeight: height + "px",
+          marginBottom: "5rem"
+        }}
       >
-        <div className="ml-2 bg-bundleBlue c-white rounded">
-          <a
-            className="col-8 btn c-white"
-            data-toggle="collapse"
-            href="#multiCollapseExample3"
-            role="button"
-            aria-expanded="false"
-            aria-controls="multiCollapseExample3"
-          >
-            <div className="row justify-content-between">
-              <span>To Be Completed</span>
-              <span>{incompleteItems} items left</span>
+        <div className="todo-list-view row no-gutters">
+          <div className="col-12 mb-2 bg-bundleBlue b-radius9 completed-container">
+            <div className="b-radius9">
+              <button
+                className="col-12 b-radius9 incomplete-header-button"
+                data-toggle="collapse"
+                data-target="#todoList3"
+                type="button"
+                aria-expanded="false"
+                aria-controls="todoList3"
+                style={{ textDecoration: "none" }}
+              >
+                <div className="row justify-content-between bg-bundleBlue b-radius9 incomplete-header">
+                  <span className="p-3 mali700">To Be Completed</span>
+                  <span className="p-3 mali400">
+                    {incompleteCount} items left
+                  </span>
+                </div>
+              </button>
             </div>
-          </a>
-        </div>
-        <div className="col">
-          <div
-            className="collapse show multi-collapse"
-            id="multiCollapseExample3"
-          >
-            <div className="">
-              {todoList.map((e, i, a) => {
-                let t = a[a.length - 1 - i];
-                if (t.complete === false) {
-                  return (
-                    <div className="todo" key={i}>
-                      <Todo
-                        task_name={t.task_name}
-                        index={a.length - 1 - i}
-                        value={t.id}
-                        handleCompleteTodo={handleCompleteTodo}
-                        handleDeleteTodo={handleDeleteTodo}
-                        complete={t.complete}
-                      />
-                    </div>
-                  );
-                }
-                return null;
-              })}
+
+            <div className="col-12">
+              <div
+                className="row no-gutters justify-content-center collapse show "
+                id="todoList3"
+              >
+                <div className="col-12">{incompleteTodos}</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <button
-          className="col-8 btn bg-smokeGrey c-white ml-2 rounded"
-          type="button"
-          data-toggle="collapse"
-          data-target="#multiCollapseExample2"
-          aria-expanded="false"
-          aria-controls="multiCollapseExample2"
-        >
-          <div className="row justify-content-between">
-            <span>Completed</span>
-            <span>{completeItems} items</span>
-          </div>
-        </button>
+          <div className="col-12 bg-smokeGrey b-radius9 complete-header ml-2">
+            <button
+              className="col-12 bg-smokeGrey c-white b-radius9 complete-header"
+              type="button"
+              data-toggle="collapse"
+              data-target="#todoList2"
+              aria-expanded="false"
+              aria-controls="todoList2"
+            >
+              <div className="row justify-content-between b-radius9 complete-header">
+                <span className="mali700 p-3">Completed</span>
+                <span className="mali400 p-3">{completedCount} items</span>
+              </div>
+            </button>
 
-        <div className="col">
-          <div
-            className="collapse show multi-collapse"
-            id="multiCollapseExample2"
-          >
-            <div className="">
-              {todoList.map((e, i, a) => {
-                let t = a[a.length - 1 - i];
-                if (t.complete === true) {
-                  return (
-                    <div className="todo" key={i}>
-                      <Todo
-                        task_name={t.task_name}
-                        index={a.length - 1 - i}
-                        value={t.id}
-                        handleDeleteTodo={handleDeleteTodo}
-                        complete={t.complete}
-                      />
-                    </div>
-                  );
-                }
-                return null;
-              })}
+            <div className="col">
+              <div className="collapse " id="todoList2">
+                <div className="">{completedTodos}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="d-flex justify-content-center">
-        <AddTodo
-          todoInput={todoInput}
-          handleTodoInputChange={handleTodoInputChange}
-          addTodo={addTodo}
-        />
       </div>
     </>
   );

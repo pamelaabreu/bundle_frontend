@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
 import APIKEYS from "../../config.json";
+import baseURL from "../../services/backendUrlConnect";
+
+import "./Trip.css";
 
 import Itinerary from "../../components/Itinerary/Itinerary";
 import Weather from "../../components/Weather/Weather";
 
-const baseURL = "http://localhost:5000";
 const itineraryEndpointBase = "/itinerary/";
 const tripEndpointBase = "/trip/";
 const weatherEndpointBase = "/weather/";
@@ -39,7 +41,7 @@ class Trip extends Component {
     const location = `${this.state.trip.city} ${this.state.trip.country}`;
     const mqLocation = await axios({
       method: "get",
-      url: `http://www.mapquestapi.com/geocoding/v1/address?key=${
+      url: `https://www.mapquestapi.com/geocoding/v1/address?key=${
         APIKEYS.MQ_API_KEY
       }&location=${location}`
     });
@@ -78,36 +80,51 @@ class Trip extends Component {
     const { city, country, departure_date, return_date } = this.state.trip;
     const { trip_id: tripID } = this.props.match.params;
     return (
-      <div className="container mt-5">
-        <div className="row justify-content-end">
-          <div className="col-2">
-            <button className="row" onClick={this.moveToPack}>
-              <span className="col-12 text-center">Pack</span>
-              <i className="col-12 fas fa-long-arrow-alt-right text-center pack--arrow-transform" />
-            </button>
+      <div className={`trip-container`}>
+        <div
+          className="trip-details-section"
+          style={{
+            backgroundImage: `url(https://source.unsplash.com/weekly?${city})`,
+            backgroundSize: "cover"
+          }}
+        >
+          <div className="trip-details-section-background-gradient">
+            <div className="row justify-content-end m-0">
+              <div className="pack-button-container">
+                <button
+                  className="pack-button btn btn-info btn-lg"
+                  onClick={this.moveToPack}
+                >
+                  <span className="col-12 text-center">Pack</span>
+                  <i className="col-6 col-lg-12 fas fa-long-arrow-alt-right text-center pack--arrow-transform" />
+                </button>
+              </div>
+            </div>
+            <div className="trip-details-container mt-5 pt-4 container">
+              <div className="col-10 col-lg-4 trip-details-header">
+                <h5 className="trip-details-title">Trip Details</h5>
+                <h6 className="trip-destination-title">
+                  {city}, {country}
+                </h6>
+                <p className="trip-destination-dates">{`${moment(
+                  departure_date
+                ).format("MMM DD")} - ${moment(return_date).format(
+                  "MMM DD"
+                )}`}</p>
+                <div className="trip-departure-time-text">
+                  <p>
+                    {moment()
+                      .startOf(moment())
+                      .to(departure_date)}
+                  </p>
+                </div>
+              </div>
+              <Weather weatherInfo={this.state.weather_info} />
+            </div>
           </div>
         </div>
-        <div className="row justify-content-between">
-          <div className="col-lg-4">
-            <div>
-              <h5 className="trip-details-title">Trip Details</h5>
-              <h6 className="trip-destination-title">
-                {city}, {country}
-              </h6>
-            </div>
-            <div>
-              <p>
-                {moment()
-                  .endOf(departure_date)
-                  .to(return_date)}
-              </p>
-            </div>
-          </div>
-          <div className="col-lg-8">
-            <Weather weatherInfo={this.state.weather_info} />
-          </div>
-        </div>
-        <div className="col-12 row mt-3">
+
+        <div className="trip-itinerary-container">
           <Itinerary
             info={this.state.itinerary}
             trip={this.state.trip}

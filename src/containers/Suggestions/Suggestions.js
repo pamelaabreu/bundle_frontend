@@ -5,6 +5,8 @@ import axios from "axios";
 import { buildBundle } from "../../services/backendCalls";
 import "./Suggestions.css";
 import FirebaseAuthContext from "../../context/FirebaseAuth";
+import Baseurl from "../../services/backendUrlConnect";
+import { addTrip } from "../../services/homeLocalStorage";
 
 export default withRouter(props => {
   const {
@@ -28,16 +30,18 @@ export default withRouter(props => {
     const allTheItems = getSuggestions(duration);
     setItems(allTheItems);
 
-    axios({
-      method: "get",
-      url: "http://localhost:5000/categories/all"
-    })
-      .then(res => {
-        setCategories(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const categoryObj = [
+      { name: "clothing", id: 1 },
+      { name: "accessories", id: 2 },
+      { name: "electronics", id: 3 },
+      { name: "personals", id: 4 },
+      { name: "documents", id: 5 },
+      { name: "first-aid", id: 6 },
+      { name: "essentials", id: 7 },
+      { name: "children", id: 8 },
+      { name: "misc", id: 9 }
+    ];
+    setCategories(categoryObj);
   }, [duration]);
 
   useEffect(() => {
@@ -78,6 +82,9 @@ export default withRouter(props => {
     buildBundle(items, destination, departureDate, returnDate, user)
       .then(tripId => {
         changeLoadStatus(false);
+        if (tripId && destination && duration && departureDate && returnDate) {
+          addTrip(tripId, destination, duration, departureDate, returnDate);
+        }
         props.history.push("/pack/" + tripId);
       })
       .catch(err => {
@@ -90,7 +97,7 @@ export default withRouter(props => {
     <>
       <div className="modal-header bg-bundleBlue border-0">
         <div className="container-fluid">
-          <h2 className="c-white h1">Remove items you don't need.</h2>
+          <h2 className="c-white display-4">Remove items you don't need.</h2>
         </div>
 
         <button
@@ -110,9 +117,13 @@ export default withRouter(props => {
               <div className="suggestions-categories d-flex justify-content-between align-items-center overflow-auto pb-5">
                 {categories.map(e => {
                   const activeCatergoryStyle =
-                    "c-bundleBlue ds-lightGrey b-radius9 ";
+                    "c-bundleBlue ds-lightGrey b-radius9 bg-white";
                   const inactiveCategoryStyle =
                     "c-huate bg-transparent inactiveCategory-item";
+
+                  if (e.name === "misc") return null;
+                  if (e.name === "children") return null;
+                  if (e.name === "essentials") return null;
 
                   let activeCatergoryClassname = null;
                   if (!currCategory) {
@@ -132,7 +143,7 @@ export default withRouter(props => {
                       key={e.id}
                       onClick={handleCategoryClick(e.name)}
                       className={
-                        "mx-3 p-2 h4 capitalizeText border-0 " +
+                        "mx-3 p-4 h1 capitalizeText border-0 " +
                         activeCatergoryClassname
                       }
                     >
@@ -143,24 +154,18 @@ export default withRouter(props => {
               </div>
             ) : null}
           </div>
-          <div className="row bg-babyBlue p-3 ">
+          <div className="row bg-babyBlue p-5 justify-content-center">
             {displayItems
               ? displayItems.map((e, i) => {
                   const activeCardBorder = e.pack
                     ? "ds-lightGrey activeSuggestedItem-border"
                     : "border-0";
-                  const activeCardText = e.pack
-                    ? "c-bundleBlue"
-                    : "c-smokeGrey";
-                  const activeIconColor = e.pack
-                    ? "activeSuggestedItem-color "
-                    : "c-smokeGrey";
-
+                  const activeCardText = e.pack ? "c-denimBlue" : "c-smokeGrey";
                   return (
                     <div
                       key={i}
                       onClick={handleItemClick(e.name, i)}
-                      className="col-m m-3 b-radius9"
+                      className="col-5 col-m-4 col-lg-3 b-radius9 my-3 mx-2 p-0"
                     >
                       <div
                         className={
@@ -169,27 +174,27 @@ export default withRouter(props => {
                       >
                         <div
                           className={
-                            "p-3 bg-white text-center b-radius9 h4 border-0 " +
+                            "pt-3 bg-white text-center mali700 b-radius9 h2 border-0" +
                             activeCardText
                           }
                         >
                           {e.name}
                         </div>
                         <div className="card-body b-radius9">
-                          <div className="container-fluid px-5">
-                            <div className="row justify-content-center">
-                              <i
-                                className={
-                                  "fas fa-tshirt suggested-icon-size " +
-                                  activeIconColor
-                                }
+                          <div className="container-fluid p-0">
+                            <div className="row p-0">
+                              <img
+                                src={e.image}
+                                alt={e.name}
+                                className="col-12 p-0 m-0"
+                                height="80%"
                               />
                             </div>
-                            <div className="row justify-content-center pt-5 pb-2">
+                            <div className="row justify-content-center pt-1 pb-2">
                               {e.pack ? (
-                                <i className="far fa-check-circle activeSuggestedItem-color suggestions-checked-icon-size" />
+                                <i className="far fa-check-circle fa-3x activeSuggestedItem-color " />
                               ) : (
-                                <i className="far fa-times-circle c-smokeGrey suggestions-checked-icon-size" />
+                                <i className="far fa-times-circle fa-3x c-smokeGrey " />
                               )}
                             </div>
                           </div>
@@ -206,13 +211,13 @@ export default withRouter(props => {
       <div className="modal-footer">
         <button
           type="button"
-          className="b-radius9 c-bundleBlue bundeBlue-border-1 p-3 h4 cancelBundleButton bg-transparent"
+          className="b-radius9 c-bundleBlue bundeBlue-border-1 p-3 h1 cancelBundleButton bg-transparent"
           data-dismiss="modal"
         >
           Cancel
         </button>
         <button
-          className="bundleBlueButton border-0 p-3 h4 bundleItSubmitButton "
+          className="bundleBlueButton border-0 p-3 h1 bundleItSubmitButton "
           data-dismiss="modal"
           onClick={handleBundle}
         >

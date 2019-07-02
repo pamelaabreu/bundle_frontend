@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import "./AddItineraryForm.css";
+
 import BASE_URL from "../../services/backendUrlConnect";
 
 const itineraryTypesEndpointBase = "/itinerary/";
+
 const AddItineraryForm = props => {
   const [itineraryName, setItineraryName] = useState("");
   const [itineraryAddress, setItineraryAddress] = useState("");
   const [itineraryPhone, setItineraryPhone] = useState("");
   const [itineraryNote, setItineraryNote] = useState("");
-  const [itineraryInfo, setItineraryInfo] = useState({});
   const [itineraryTypeSelected, setItineraryTypeSelected] = useState("");
   const [itineraryTypes, setItineraryTypes] = useState([]);
 
@@ -20,22 +22,14 @@ const AddItineraryForm = props => {
   const submitFormHandler = e => {
     e.preventDefault();
 
-    console.dir({
-      name: itineraryName,
-      address: itineraryAddress,
-      phone: itineraryPhone,
-      note: itineraryNote,
-      trip_id: props.trip_id,
-      itinerary_type: itineraryTypeSelected.id
-    });
-    setItineraryInfo({
-      name: itineraryName,
-      address: itineraryAddress,
-      phone: itineraryPhone,
-      note: itineraryNote,
-      trip_id: props.trip_id,
-      itinerary_type: itineraryTypeSelected.id
-    });
+    if (
+      itineraryName.length === 0 ||
+      itineraryAddress.length === 0 ||
+      itineraryPhone.length === 0 ||
+      itineraryNote.length === 0
+    ) {
+      return;
+    }
 
     postItinerary({
       name: itineraryName,
@@ -45,9 +39,13 @@ const AddItineraryForm = props => {
       trip_id: props.trip_id,
       itinerary_type: itineraryTypeSelected.id
     }).then(itinerary => {
-      console.log(itinerary.data);
       props.setTripItinerary(itinerary.data.itineraries);
     });
+
+    setItineraryName("");
+    setItineraryAddress("");
+    setItineraryPhone("");
+    setItineraryNote("");
   };
 
   const postItinerary = data => {
@@ -70,62 +68,79 @@ const AddItineraryForm = props => {
     });
   }, []);
 
+  const capitalize = target => {
+    return target
+      .split(" ")
+      .map(e => `${e[0].toUpperCase()}${e.slice(1)}`)
+      .join(" ");
+  };
+
   const handleChangeItineraryTypes = event => {
     const value = itineraryTypes.filter(
-      element => element.name === event.target.value
+      element => element.name === event.target.value.toLowerCase()
     );
-    console.log(value);
     setItineraryTypeSelected(value[0]);
   };
 
   return (
-    <div className="col-3 card">
+    <div className="global-card add-itinerary-form-container">
       <form>
-        <div className="form-group">
-          <label>Name:</label>
+        <select
+          className="form-control-lg add-itinerary-form-type-selector col-12"
+          onChange={handleChangeItineraryTypes}
+        >
+          {itineraryTypes.map((e, i) => (
+            <option key={i} value={e.value}>
+              {capitalize(e.name)}
+            </option>
+          ))}
+        </select>
+        <div className="form-group row mt-4">
+          <label className="col-lg-4 add-itinerary-form-label">Name:</label>
           <input
-            className="form-control"
+            className="col-lg-8 form-control form-control-lg"
             type="text"
             onChange={itineraryInputHandler(setItineraryName)}
+            placeholder="The Continental"
+            value={itineraryName}
           />
         </div>
-        <div className="form-group">
-          <label>Address:</label>
+        <div className="form-group row">
+          <label className="col-lg-4 add-itinerary-form-label">Address:</label>
           <input
-            className="form-control"
+            className="col-lg-8 form-control form-control-lg"
             type="text"
             onChange={itineraryInputHandler(setItineraryAddress)}
+            value={itineraryAddress}
+            placeholder="50 Broadway"
           />
         </div>
-        <div className="form-group">
-          <label>Phone:</label>
+        <div className="form-group row">
+          <label className="col-lg-4 add-itinerary-form-label">Phone:</label>
           <input
-            className="form-control"
+            className="col-lg-8 form-control form-control-lg"
             type="text"
+            value={itineraryPhone}
             onChange={itineraryInputHandler(setItineraryPhone)}
+            placeholder="555 555-5555"
           />
         </div>
-        <div className="form-group">
-          <label>Note:</label>
+        <div className="form-group row">
+          <label className="col-lg-4 add-itinerary-form-label">Note:</label>
           <input
-            className="form-control"
+            className="col-lg-8 form-control form-control-lg"
             type="text"
+            value={itineraryNote}
             onChange={itineraryInputHandler(setItineraryNote)}
+            placeholder="Room 404"
           />
         </div>
-        <div>
-          <select
-            valu={itineraryTypes[0]}
-            onChange={handleChangeItineraryTypes}
-          >
-            {itineraryTypes.map((e, i) => (
-              <option key={i} value={e.value}>
-                {e.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button onClick={submitFormHandler}>Submit</button>
+        <button
+          className="btn btn-outline-success btn-lg mt-2"
+          onClick={submitFormHandler}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

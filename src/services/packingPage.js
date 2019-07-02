@@ -21,6 +21,13 @@ export const mountPacking = async (bagTypes, bags, lists) => {
     let totalItems = 0;
     let totalPacked = 0;
     let list_id = checkForShoppingList(lists);
+    for (let bag of allBags) {
+      bag.data = bag.data.sort(function(a, b) {
+        var textA = a.name.toUpperCase();
+        var textB = b.name.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      });
+    }
     for (let i = 0; i < allBags.length; i++) {
       const { data: items } = allBags[i];
       const { trip_id, bag_id, type_id } = bags[i];
@@ -420,4 +427,51 @@ export const addToShoppingCart = async (index, state, list_id) => {
     console.log("ERROR ADDING ITEM TO SHOPPING LIST");
     return false;
   }
+};
+
+export const getTripImg = async (id, name, city = "city") => {
+  if (localStorage.getItem(`${name}-${id}-img`)) {
+    return JSON.parse(localStorage.getItem(`${name}-${id}-img`));
+  } else {
+    city = city.includes(" ") ? city.replace(/\s/g, "%20") : city;
+    const { url } = await fetch(`https://source.unsplash.com/weekly?${city}`, {
+      method: "get"
+    });
+    localStorage.setItem(`${name}-${id}-img`, JSON.stringify(url));
+    return url;
+  }
+};
+
+export const packAll = state => {
+  const { bags, bagTypes, totalPacked, totalItems } = state;
+  const temp = {};
+  let newTotalPacked = totalPacked;
+
+  for (let bag of bags) {
+    const { trip_id, bag_id, type_id } = bag;
+    const key = bagTypes[type_id][0] + bagTypes[type_id][1] + trip_id + bag_id;
+    const copyBag = state[key];
+    for (let item of copyBag) {
+      if (item.packed) continue;
+      item.packed = true;
+      newTotalPacked += 1;
+      axios({
+        method: "put",
+        url: BASEURL + "/items/" + item.id,
+        data: {
+          packed: true
+        }
+      });
+    }
+    temp[key] = copyBag;
+  }
+  if (totalItems === newTotalPacked && newTotalPacked > totalPacked) {
+    Toast(
+      "https://cdn.lugless.com/wp-content/uploads/luggage-shipping.png" ||
+        DefaultImage,
+      `You're all packed!`
+    );
+  }
+  temp.totalPacked = newTotalPacked;
+  return temp;
 };
